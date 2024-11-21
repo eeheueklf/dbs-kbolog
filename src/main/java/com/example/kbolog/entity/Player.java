@@ -1,0 +1,31 @@
+package com.example.kbolog.entity;
+import jakarta.persistence.*;
+
+
+@Entity
+public class Player {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long playerId;
+
+    @Column(nullable = false, length = 20)
+    private String playerName;
+
+    @Column(nullable = false)
+    private Integer playerNumber;
+
+    @Column(nullable = false)
+    private Integer playerPosition;
+
+    @Column(nullable = false)
+    private String hander;  // '좌투', '우투', '스위치'
+
+    @Column(nullable = false)
+    private String battingHand;  // '좌타', '우타', '스위치'
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+}

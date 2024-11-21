@@ -1,0 +1,52 @@
+
+
+.footer{
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 100px;
+  width: 100%;
+  background-color: white;
+}
+
+
+.navigation{
+  text-align:center;
+  display:flex;
+  justify-content: center;
+}
+
+ul{
+  list-style:none;
+  display:flex;
+}
+
+
+ul li{
+  list-style: none;
+  text-align: center;
+  display: block;
+}
+
+ul li a{
+  text-decoration:none;
+  padding: 0 55px;
+  display: block;
+  font-size:13px;
+  color: #A2A8B2;
+}
+
+ul li a .ii{
+  width : 26px;
+  height: 26px;
+  text-align: center;
+  color: #A2A8B2;
+}
+
+ul li:hover a, ul li:hover a .ii{
+  color: black;
+}
+
+ul li a div{
+  margin-bottom : 5px;
+}

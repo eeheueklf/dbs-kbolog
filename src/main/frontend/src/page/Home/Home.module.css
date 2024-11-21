@@ -1,0 +1,58 @@
+@font-face {
+  font-family: 'KBO-Dia-Gothic_bold';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,body {
+  width: 100%;
+  height: 100%;
+}
+  
+.loginPage {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; /* Center content vertically */
+  height: 100vh;
+  position: relative;
+  width: 100vw;
+}
+
+
+.flex{
+  display: flex;
+  justify-content : center;
+}
+
+
+.loginPage .title {
+  color: #000000;
+  font-size: 100px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  padding-bottom: 20px;
+  font-family: 'KBO-Dia-Gothic_bold', sans-serif;
+}
+
+.signin{
+  font-family : "S-CoreDream-3Light", sans-serif;
+  font-weight: 600;
+  color: #585858;
+  font-size: 22px;
+  margin: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+}
