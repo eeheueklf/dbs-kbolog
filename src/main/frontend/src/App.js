@@ -3,7 +3,9 @@ import './App.css';
 import Main from './page/mainpage/Mainpage';
 import Home from './page/Home/Home';
 import Signin from './page/Signin/Signin';
-import Signup from "./page/Signup/Signup"
+import Signup from "./page/Signup/Signup";
+import Log from "./page/Log/Log";
+
 
 function App() {
     return (
@@ -13,8 +15,8 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/main" element={<Main />} />
                     <Route path="/signin" element={<Signin />}/>
-
                     <Route path="/signup" element={<Signup />}/>
+                    <Route path="/log/:id" element={<Log />} />
                 </Routes>
             </BrowserRouter>
         </div>

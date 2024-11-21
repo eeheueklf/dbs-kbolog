@@ -6,14 +6,20 @@ import Table from "../../components/_Tool/Table"
 
 export default function Mainpage() {
     const [record, setRecord] = useState([]);
+    let token = localStorage.getItem('username') || '';
 
-
+// , {
+//         method :'POST',
+//             headers:{
+//             'Content-Type': 'application/json',
+//                 'Authorization': `Bearer ${token}`
+//         }
+//     }
 
     useEffect(() => {
         fetch("/api/watching")
             .then(res=>res.json())
             .then(res=> {
-                console.log(res);
                 setRecord(res);
             })
             .catch((err) => {
@@ -31,6 +37,7 @@ export default function Mainpage() {
                 <br/>다가오는 경기 - 추후 기능 추가<br/><br/>
                 {record.map(data => (
                     <Table
+                        id={data.watchingId}
                         title={data.title}
                         date={(() => {
                             const gameDate = new Date(data.game.gameDate);

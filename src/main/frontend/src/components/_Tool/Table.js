@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Table.module.css";
+import { useNavigate } from "react-router-dom";
 
 function getTeamClass(teamName) {
     if (teamName === "기아") return styles.kia;
@@ -16,13 +17,19 @@ function getTeamClass(teamName) {
     return styles.defaultTeam; // 기본 스타일
 }
 
-export default function Table({ title, date, location, homeTeam, awayTeam }) {
+export default function Table({ id, title, date, location, homeTeam, awayTeam }) {
+    const navigate = useNavigate();
 
+    // 테이블 행 클릭 시 실행되는 함수
+    const handleRowClick = (id) => {
+        navigate(`/log/${id}`); // 예: "/posts/1"로 이동
+    };
     return (
         <div className={styles.tableWrapper}>
             <table className={styles.table}>
                 <tbody>
-                    <tr className={styles.tr}>
+                    <tr className={styles.tr}
+                        onClick={() => handleRowClick(id)}>
                         <td className={styles.td}>{title}</td>
                         <td className={styles.td}>{date}</td>
                         <td className={styles.td}>{location}</td>
