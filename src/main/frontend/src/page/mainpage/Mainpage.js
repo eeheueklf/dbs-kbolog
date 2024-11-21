@@ -5,19 +5,22 @@ import HeaderImg from "../../image/nail.png";
 import Table from "../../components/_Tool/Table"
 
 export default function Mainpage() {
-    const [data, setData] = useState([]);
-    const columns = [
-        { Header: "팀", accessor: "user_id" },
-        { Header: "날짜", accessor: "title" },
-        { Header: "상대", accessor: "content" },
-    ];
+    const [record, setRecord] = useState([]);
+
+
 
     useEffect(() => {
         fetch("/api/watching")
-            .then((response) => response.json())
-            .then((data) => setData(data))
-            .catch((err) => console.error("API fetch error:", err));
+            .then(res=>res.json())
+            .then(res=> {
+                console.log(res);
+                setRecord(res);
+            })
+            .catch((err) => {
+                console.error("API fetch error:", err); // 에러 처리
+            });
     }, []);
+
     return (
         <div className={styles.default}>
             <div className={styles.cropping}>
@@ -26,7 +29,22 @@ export default function Mainpage() {
             <div className={styles.inner}>
                 <div className={styles.title}>2024 KBO</div>
                 다가오는 경기
-                <Table columns={columns} data={data} />
+                {record.map(data => (
+                    <Table
+                        title={data.title}
+                        date={(() => {
+                            const gameDate = new Date(data.game.gameDate);
+                            const year = gameDate.getFullYear();
+                            const month = String(gameDate.getMonth() + 1).padStart(2, '0');  // getMonth() returns 0-11
+                            const day = String(gameDate.getDate()).padStart(2, '0');
+                            return `${year}년 ${month}월 ${day}일`;
+                        })()}
+                        homeTeam={data.game.homeTeam.teamName}
+                        awayTeam={data.game.awayTeam.teamName}
+                    />
+                ))}
+
+
             </div>
             <Footer />
         </div>

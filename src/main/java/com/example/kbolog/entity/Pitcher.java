@@ -9,11 +9,11 @@ public class Pitcher {
     @Id
     @OneToOne
     @JoinColumn(name = "player_id")
-    private Player player;
+    public Player player;
 
     @Column(nullable = false)
-    private Double bb; // 볼넷
+    public Double bb; // 볼넷
 
     @Column(nullable = false)
-    private Double era; // 평균자책
+    public Double era; // 평균자책
 }

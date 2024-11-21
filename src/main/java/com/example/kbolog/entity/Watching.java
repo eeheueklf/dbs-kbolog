@@ -2,27 +2,29 @@ package com.example.kbolog.entity;
 
 import jakarta.persistence.*;
 
-
 @Entity
 public class Watching {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long watchingId;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
+    public Long watchingId;
 
     @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)
-    private Game game;
+    public Game game;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private Member user;
+    public Member user;
 
     @Column(nullable = false, length = 255)
-    private String title;
+    public String title;
 
     @Column(nullable = false, length = 500)
-    private String content;
+    public String content;
+
+    @Column(nullable = false)
+    public String location;
 
 }
 

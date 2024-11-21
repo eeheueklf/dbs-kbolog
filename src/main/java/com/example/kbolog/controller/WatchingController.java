@@ -17,7 +17,7 @@ public class WatchingController {
     private final TestService testService;
 
     @GetMapping(value="/api/watching")
-    public List<Watching> getStadiumList(){
+    public List<Watching> getWatchingList(){
         return testService.getWatchingList();
     }
 

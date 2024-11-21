@@ -8,8 +8,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Pretendard-Regular';
+  box-sizing: border-box
 }
 
 html, body {
@@ -27,12 +26,13 @@ html, body {
 .inner {
   width: 36vw;
   margin: 2rem auto;
-  text-align: left;
+  text-align: left;;
 }
 
 .title {
   font-size: 1.8rem;
-  font-weight: bold;
+  font-weight: bold;;
+  font-family: 'Pretendard-Regular';
 }
 
 
