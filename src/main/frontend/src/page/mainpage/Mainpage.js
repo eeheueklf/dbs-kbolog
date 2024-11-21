@@ -28,7 +28,7 @@ export default function Mainpage() {
             </div>
             <div className={styles.inner}>
                 <div className={styles.title}>2024 KBO</div>
-                다가오는 경기
+                <br/>다가오는 경기 - 추후 기능 추가<br/><br/>
                 {record.map(data => (
                     <Table
                         title={data.title}
@@ -39,6 +39,7 @@ export default function Mainpage() {
                             const day = String(gameDate.getDate()).padStart(2, '0');
                             return `${year}년 ${month}월 ${day}일`;
                         })()}
+                        location={data.location}
                         homeTeam={data.game.homeTeam.teamName}
                         awayTeam={data.game.awayTeam.teamName}
                     />
