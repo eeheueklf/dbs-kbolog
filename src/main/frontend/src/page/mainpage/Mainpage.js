@@ -7,7 +7,6 @@ import Table from "../../components/_Tool/Table"
 export default function Mainpage() {
     const [record, setRecord] = useState([]);
 
-    console.log("rrrr",localStorage.getItem("username"))
     useEffect(() => {
         fetch("/api/watching")
             .then(res=>res.json())

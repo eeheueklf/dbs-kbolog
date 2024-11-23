@@ -20,9 +20,9 @@ export default function Signin() {
             });
 
             // 서버 응답에서 로그인한 사용자 정보 추출
-            const loggedInUser = response.data.loginUser; // delete
+            const loggedInUser = response.data.username; // delete
             console.log("로그인된 사용자:", loggedInUser); // deleter
-            localStorage.setItem("username", loggedInUser);
+            sessionStorage.setItem("username", loggedInUser);
 
             console.log("로그인 성공:", response.data.message);
             navigate('/main');
