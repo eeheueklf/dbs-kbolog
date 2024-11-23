@@ -1,13 +1,18 @@
 import styles from "./Log.module.css";
 import React, {useEffect, useState} from "react";
 import Footer from "../../components/_Layout/Footer";
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import SingleTable from "../../components/_Tool/SingleTable";
 import Table from "../../components/_Tool/Table";
 
 export default function Log() {
     const [watchingContent, setContent] = useState(null);
     const { id } = useParams();
+    const navigate = useNavigate();
+
+    const handleLogEdit = (id) => {
+        navigate(`/Edit/${id}`);
+    };
 
     useEffect(() => {
         fetch(`/api/log/${id}`)
@@ -50,7 +55,7 @@ export default function Log() {
                             data ={watchingContent.location}
                         />
                         <p className={styles.content}>{watchingContent.content}</p>
-
+                        <button onClick={() => handleLogEdit(id)}>수정</button>
                     </div>
                 ) : (
                     <p>Loading...</p>  // 로딩 중

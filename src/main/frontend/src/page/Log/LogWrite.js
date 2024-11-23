@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Log.module.css";
+import { useNavigate } from "react-router-dom";
+
 
 export default function LogWrite() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         title: "",
         content: "",
@@ -69,6 +72,7 @@ export default function LogWrite() {
             .then((res) => {
                 if (res.ok) {
                     alert("작성 완료");
+                    navigate('/main');
                 } else {
                     throw new Error("Failed to save data");
                 }

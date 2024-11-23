@@ -77,5 +77,38 @@ public class WatchingController {
             watchingRepository.save(watching);
         }
     }
+    @PutMapping("/api/log/edit/{id}")
+    public ResponseEntity<String> logEdit(
+            @PathVariable Long id, // 수정할 로그의 ID
+            @RequestBody WatchingRequest request, // 클라이언트로부터 받은 수정 데이터
+            HttpSession session) {
+
+        String username = (String) session.getAttribute("username");
+
+        Game game = gameRepository.findById(request.getGameId()).orElse(null);
+        Member user = memberRepository.findByUsername(username);
+
+        // 로그가 존재하고, 게임과 사용자가 유효한 경우에만 처리
+        if (game != null && user != null) {
+            // 수정할 Watching 객체 찾아오기
+            Watching existingWatching = watchingRepository.findByWatchingId(id)
+                    .orElseThrow(() -> new RuntimeException("Log not found"));
+
+            // 기존 데이터 수정
+            existingWatching.setGame(game);
+            existingWatching.setUser(user);
+            existingWatching.setTitle(request.getTitle());
+            existingWatching.setContent(request.getContent());
+            existingWatching.setLocation(request.getLocation());
+
+            // 수정된 데이터를 저장
+            watchingRepository.save(existingWatching);
+
+            return ResponseEntity.ok("Log updated successfully");
+        } else {
+            return ResponseEntity.status(400).body("Invalid game or user");
+        }
+    }
+
 
 }

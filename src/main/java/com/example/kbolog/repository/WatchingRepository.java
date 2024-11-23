@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface WatchingRepository extends JpaRepository<Watching, Long> {
     List<Watching> findByUser(Member user);
-    Optional<Watching> findById(Long id);
+    Optional<Watching> findByWatchingId(Long id);
 }
