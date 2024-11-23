@@ -14,11 +14,12 @@ import org.springframework.stereotype.Service;
 public class TestService {
 
     private StadiumRepository stadiumRepository;
-    private WatchingRepository watchingRepository;
 
     public List<Stadium> getStadiumList() {
         return stadiumRepository.findAll();
     }
+
+    private WatchingRepository watchingRepository;
 
     public List<Watching> getWatchingList() { return watchingRepository.findAll(); }
 }

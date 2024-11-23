@@ -6,16 +6,8 @@ import Table from "../../components/_Tool/Table"
 
 export default function Mainpage() {
     const [record, setRecord] = useState([]);
-    let token = localStorage.getItem('username') || '';
 
-// , {
-//         method :'POST',
-//             headers:{
-//             'Content-Type': 'application/json',
-//                 'Authorization': `Bearer ${token}`
-//         }
-//     }
-
+    console.log("rrrr",localStorage.getItem("username"))
     useEffect(() => {
         fetch("/api/watching")
             .then(res=>res.json())
@@ -26,6 +18,7 @@ export default function Mainpage() {
                 console.error("API fetch error:", err); // 에러 처리
             });
     }, []);
+
 
     return (
         <div className={styles.default}>

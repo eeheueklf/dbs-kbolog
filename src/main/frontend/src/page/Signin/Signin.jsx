@@ -8,20 +8,24 @@ export default function Signin() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
     const handleSignIn = async () => {
         const data = {
             username,
             password,
         };
 
-
         try {
-            const response = await axios.post("/api/signin", data);
+            const response = await axios.post("/api/signin", data, {
+                withCredentials: true, // 쿠키 전달 활성화
+            });
 
-            // 로그인 성공
-            console.log("로그인 성공:", response.data);
-            navigate('/main'); //로그인 페이지로
+            // 서버 응답에서 로그인한 사용자 정보 추출
+            const loggedInUser = response.data.loginUser; // delete
+            console.log("로그인된 사용자:", loggedInUser); // deleter
+            localStorage.setItem("username", loggedInUser);
+
+            console.log("로그인 성공:", response.data.message);
+            navigate('/main');
 
         } catch (err) {
             if (err.response) {
@@ -38,9 +42,8 @@ export default function Signin() {
                 console.error("네트워크 오류 또는 서버 문제:", err.message);
             }
         }
-
-
     };
+
 
 
 
