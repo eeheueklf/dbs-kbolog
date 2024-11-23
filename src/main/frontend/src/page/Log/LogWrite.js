@@ -4,10 +4,9 @@ import styles from "./Log.module.css";
 export default function LogWrite() {
     const [formData, setFormData] = useState({
         title: "",
-        date: "",
-        location: "",
-        selectedGame: "",
         content: "",
+        gameId: "",  // gameId를 저장하는 상태
+        location: "",
     });
 
     const [games, setGames] = useState([]); // 날짜에 따른 경기 목록 저장
@@ -22,6 +21,7 @@ export default function LogWrite() {
             .then((res) => res.json())
             .then((data) => {
                 setGames(data); // 경기 목록을 상태에 저장
+                console.log('game', data)
             })
             .catch((err) => {
                 console.error("Failed to fetch games:", err);
@@ -38,19 +38,32 @@ export default function LogWrite() {
         }));
     };
 
+    // 게임 선택 핸들러
+    const handleGameSelect = (e) => {
+        const selectedGameId = e.target.value;
+        console.log(e.target.value)
+        setFormData((prevData) => ({
+            ...prevData,
+            gameId: selectedGameId,  // 게임 ID를 상태에 저장
+        }));
+    };
+
     // 폼 제출 핸들러
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log("formData:", formData); // formData를 확인
 
         // 선택된 경기 정보를 서버로 전송
-        fetch("/api/log", {
+        fetch("/api/log/write", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                ...formData,
-                gameId: formData.selectedGame,
+                title: formData.title,
+                content: formData.content,
+                gameId: formData.gameId,  // gameId를 함께 전송
+                location: formData.location,
             }),
         })
             .then((res) => {
@@ -96,9 +109,9 @@ export default function LogWrite() {
                         <label>경기</label>
                         {games.length > 0 ? (
                             <select
-                                name="selectedGame"
-                                value={formData.selectedGame}
-                                onChange={handleInputChange}
+                                name="gameId"
+                                value={formData.gameId}
+                                onChange={handleGameSelect}
                                 required
                                 className={styles.input}
                             >
@@ -106,9 +119,10 @@ export default function LogWrite() {
                                     경기 선택
                                 </option>
                                 {games.map((game) => (
-                                    <option key={game.id} value={game.id}>
-                                        {`${game.homeTeam.teamName} vs ${game.awayTeam.teamName} (${game.location})`}
+                                    <option key={game.gameId} value={game.gameId}>
+                                        {`${game.homeTeam.teamName} vs ${game.awayTeam.teamName}`}
                                     </option>
+
                                 ))}
                             </select>
                         ) : (

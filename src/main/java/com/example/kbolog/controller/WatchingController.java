@@ -1,7 +1,10 @@
 package com.example.kbolog.controller;
 
+import com.example.kbolog.DTO.WatchingRequest;
+import com.example.kbolog.entity.Game;
 import com.example.kbolog.entity.Member;
 import com.example.kbolog.entity.Watching;
+import com.example.kbolog.repository.GameRepository;
 import com.example.kbolog.repository.MemberRepository;
 import com.example.kbolog.repository.WatchingRepository;
 import jakarta.servlet.http.HttpSession;
@@ -9,10 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.repository.config.ResourceReaderRepositoryPopulatorBeanDefinitionParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +23,7 @@ public class WatchingController {
 
     private final WatchingRepository watchingRepository;
     private final MemberRepository memberRepository;
+    private final GameRepository gameRepository;
 
     @GetMapping(value="/api/watching")
     public ResponseEntity<List<Watching>> getWatchingList(HttpSession session) {
@@ -57,5 +58,24 @@ public class WatchingController {
         return ResponseEntity.ok(watching);
     }
 
+    @PostMapping("/api/log/write")
+    public void logWrite(@RequestBody WatchingRequest request, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+
+        Game game = gameRepository.findById(request.getGameId()).orElse(null);
+        Member user = memberRepository.findByUsername(username);
+
+        if (game != null && user != null) {
+            // Watching 객체 생성 및 설정
+            Watching watching = new Watching();
+            watching.setGame(game);
+            watching.setUser(user);
+            watching.setTitle(request.getTitle());
+            watching.setContent(request.getContent());
+            watching.setLocation(request.getLocation());
+
+            watchingRepository.save(watching);
+        }
+    }
 
 }

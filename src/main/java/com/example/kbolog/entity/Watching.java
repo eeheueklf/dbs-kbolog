@@ -1,8 +1,12 @@
 package com.example.kbolog.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Watching {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
