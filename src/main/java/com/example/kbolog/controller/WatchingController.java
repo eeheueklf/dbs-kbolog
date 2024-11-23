@@ -110,5 +110,24 @@ public class WatchingController {
         }
     }
 
+    @DeleteMapping("/api/log/delete/{id}")
+    public ResponseEntity<String> logDelete(@PathVariable Long id, HttpSession session) {
+
+        // 세션에서 사용자 이름 가져오기
+        String username = (String) session.getAttribute("username");
+
+        // 삭제할 로그 찾기
+        Watching existingWatching = watchingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Log not found"));
+
+        // 사용자와 로그 작성자가 일치하는지 확인
+        if (existingWatching.getUser().getUsername().equals(username)) {
+            // 로그 삭제
+            watchingRepository.delete(existingWatching);
+            return ResponseEntity.ok("Log deleted successfully");
+        } else {
+            return ResponseEntity.status(403).body("You do not have permission to delete this log");
+        }
+    }
 
 }

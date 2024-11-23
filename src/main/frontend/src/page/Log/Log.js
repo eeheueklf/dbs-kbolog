@@ -14,6 +14,23 @@ export default function Log() {
         navigate(`/Edit/${id}`);
     };
 
+    const handleLogDelete = () => {
+        fetch(`/api/log/delete/${id}`, {
+            method: "DELETE",
+        })
+            .then((res) => {
+                if (res.ok) {
+                    alert("로그가 삭제되었습니다.");
+                    navigate("/main"); // 삭제 후 메인 페이지로 이동
+                } else {
+                    alert("삭제 실패: " + res.statusText);
+                }
+            })
+            .catch((err) => {
+                console.error("Error deleting log:", err);
+            });
+    };
+
     useEffect(() => {
         fetch(`/api/log/${id}`)
             .then(res=>res.json())
@@ -35,27 +52,29 @@ export default function Log() {
                         <p className={styles.emoji}>{watchingContent.title.slice(0, 2)}</p>
                         <p className={styles.title}>{watchingContent.title.slice(2)}</p>
                         <SingleTable
-                            iconName={ "faCalendar"}
-                            type = {"날짜"}
-                            data = {(() => {
+                            iconName={"faCalendar"}
+                            type={"날짜"}
+                            data={(() => {
                                 const gameDate = new Date(watchingContent.game.gameDate);
                                 const year = gameDate.getFullYear();
                                 const month = String(gameDate.getMonth() + 1).padStart(2, '0');  // getMonth() returns 0-11
                                 const day = String(gameDate.getDate()).padStart(2, '0');
-                                return `${year}년 ${month}월 ${day}일`;})()}
+                                return `${year}년 ${month}월 ${day}일`;
+                            })()}
                         />
                         <SingleTable
-                            iconName={ "faCircleInfo"}
-                            type = {"팀"}
-                            data = {`${watchingContent.game.homeTeam.teamName}vs${watchingContent.game.awayTeam.teamName}`}
+                            iconName={"faCircleInfo"}
+                            type={"팀"}
+                            data={`${watchingContent.game.homeTeam.teamName}vs${watchingContent.game.awayTeam.teamName}`}
                         />
                         <SingleTable
                             iconName={"faTicket"}
-                            type = {"위치"}
-                            data ={watchingContent.location}
+                            type={"위치"}
+                            data={watchingContent.location}
                         />
                         <p className={styles.content}>{watchingContent.content}</p>
                         <button onClick={() => handleLogEdit(id)}>수정</button>
+                        <button onClick={() => handleLogDelete(id)}>삭제</button>
                     </div>
                 ) : (
                     <p>Loading...</p>  // 로딩 중
