@@ -19,7 +19,6 @@ export default function Log() {
                 console.error("API fetch error:", err); // 에러 처리
             });
     }, []);
-    console.log(watchingContent)
 
     return (
         <div className={styles.default}>
@@ -28,8 +27,8 @@ export default function Log() {
             <div className={styles.inner}>
                 {watchingContent ? (
                     <div>
-                        <p className={styles.emoji}>{watchingContent.title.slice(0, 3)}</p>
-                        <p className={styles.title}>{watchingContent.title.slice(3)}</p>
+                        <p className={styles.emoji}>{watchingContent.title.slice(0, 2)}</p>
+                        <p className={styles.title}>{watchingContent.title.slice(2)}</p>
                         <SingleTable
                             iconName={ "faCalendar"}
                             type = {"날짜"}

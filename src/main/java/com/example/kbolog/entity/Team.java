@@ -12,6 +12,7 @@ public class Team {
 
     @Column(nullable = false, unique = true, length = 20)
     public String teamName;
+    public String sponsor;
 
     @Column(nullable = false)
     public Year foundedYear;

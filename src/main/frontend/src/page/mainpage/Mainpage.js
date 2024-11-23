@@ -39,11 +39,11 @@ export default function Mainpage() {
                             return `${year}년 ${month}월 ${day}일`;
                         })()}
                         location={data.location}
-                        homeTeam={data.game.homeTeam.teamName}
-                        awayTeam={data.game.awayTeam.teamName}
+                        homeTeam={data.game.homeTeam.sponsor}
+                        awayTeam={data.game.awayTeam.sponsor}
                     />
                 ))}
-
+                <Table id={-1}/>
 
             </div>
             <Footer />

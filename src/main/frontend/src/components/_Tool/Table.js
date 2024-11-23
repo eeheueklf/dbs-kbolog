@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./Table.module.css";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export function getTeamClass(teamName) {
     if (teamName === "기아") return styles.kia;
@@ -23,26 +25,47 @@ export default function Table({ id, title, date, location, homeTeam, awayTeam })
     const handleRowClick = (id) => {
         navigate(`/log/${id}`);
     };
+
+    const handleWriteLog = () => {
+        navigate('/write');
+    }
+    if (id === -1) {
+        return (
+            <div className={styles.tableWrapper}>
+                <table className={styles.table}>
+                    <tbody>
+                    <tr className={styles.tr}
+                        onClick={handleWriteLog}>
+                        <td className={styles.tdPlus}>
+                            <FontAwesomeIcon className={styles.ii} icon={faPlus} />
+                            ㅤ새 기록
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
     return (
         <div className={styles.tableWrapper}>
             <table className={styles.table}>
                 <tbody>
-                    <tr className={styles.tr}
-                        onClick={() => handleRowClick(id)}>
-                        <td className={styles.td}>{title}</td>
-                        <td className={styles.td}>{date}</td>
-                        <td className={styles.td}>{location}</td>
-                        <td className={styles.td}>
+                <tr className={styles.tr}
+                    onClick={() => handleRowClick(id)}>
+                    <td className={styles.td}>{title}</td>
+                    <td className={styles.td}>{date}</td>
+                    <td className={styles.td}>{location}</td>
+                    <td className={styles.td}>
                             <span className={`${styles.highlight} ${getTeamClass(homeTeam)}`}>
                                 {homeTeam}
                             </span>
-                        </td>
-                        <td className={styles.td}>
+                    </td>
+                    <td className={styles.td}>
                             <span className={`${styles.highlight} ${getTeamClass(awayTeam)}`}>
                                 {awayTeam}
                             </span>
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
