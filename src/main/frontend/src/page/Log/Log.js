@@ -11,7 +11,6 @@ export default function Log() {
     const [watchingContent, setContent] = useState(null);
     const { id } = useParams();
     const navigate = useNavigate();
-
     const handleLogEdit = (id) => {
         navigate(`/Edit/${id}`);
     };

@@ -1,13 +1,18 @@
 package com.example.kbolog.controller;
 
 import com.example.kbolog.entity.Member;
+import com.example.kbolog.entity.Team;
 import com.example.kbolog.repository.MemberRepository;
+import com.example.kbolog.repository.TeamRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +21,7 @@ import java.util.Map;
 public class MemberController {
 
     private final MemberRepository memberRepository;
+    private final TeamRepository teamRepository;
 
     @PostMapping("/api/signup")
     public void signup(@RequestBody Member member) {
@@ -55,6 +61,30 @@ public class MemberController {
         Member member = memberRepository.findByUsername(username);
         return ResponseEntity.ok(member);
     }
+    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
+
+    // 응원 팀 선택/수정
+    @PostMapping("/api/my/selectTeam")
+    public ResponseEntity<?> selectTeam(@RequestBody String sponsor, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            return ResponseEntity.status(401).body("Unauthorized");
+        }
+        Member member = memberRepository.findByUsername(username);
+        if (member == null) {
+            return ResponseEntity.status(404).body("User not found");
+        }
+        Team team = teamRepository.findBySponsor(sponsor);
+        if (team == null) {
+            return ResponseEntity.status(404).body("Team not found");
+        }
+        member.setRootTeam(team);
+        member.setRootdate(LocalDate.now());
+        memberRepository.save(member);
+        return ResponseEntity.ok("Good");  // 정상적으로 OK 응답
+    }
+
 
 
 

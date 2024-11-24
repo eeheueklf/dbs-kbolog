@@ -1,9 +1,12 @@
 package com.example.kbolog.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+
 import java.time.Year;
 
 @Entity
+@Getter
 public class Team {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

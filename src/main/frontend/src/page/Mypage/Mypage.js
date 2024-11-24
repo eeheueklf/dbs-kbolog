@@ -1,20 +1,23 @@
 import styles from "./Mypage.module.css";
 import React, {useEffect, useState} from "react";
 import Footer from "../../components/_Layout/Footer";
-import {useNavigate, useParams} from 'react-router-dom';
 import SingleTable from "../../components/_Tool/SingleTable";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMarker } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMarker} from "@fortawesome/free-solid-svg-icons";
+import {useNavigate} from "react-router-dom";
 
 export default function Mypage() {
     const [user, setUser] = useState([]);
     const [rootTeam, setRootTeam] = useState([]);
-
+    const navigate = useNavigate();
+    const handleLogEdit = () => {
+        navigate(`/my/edit`);
+    };
     useEffect(() => {
         fetch("/api/my")
-            .then(res=>res.json())
-            .then(res=> {
+            .then(res => res.json())
+            .then(res => {
                 setUser(res);
                 setRootTeam(res.rootTeam.teamName)
             })
@@ -23,13 +26,15 @@ export default function Mypage() {
             });
     }, []);
 
+
+
     return (
         <div className={styles.default}>
             <div className={styles.cropping}>
             </div>
             <div className={styles.inner}>
                 <div>
-                    <FontAwesomeIcon className={styles.ii} icon={faMarker} />
+                    <FontAwesomeIcon className={styles.ii} icon={faMarker} onClick={handleLogEdit}/>
                     <p className={styles.emoji}>💟</p>
                     <p className={styles.title}>마이페이지</p>
                     <SingleTable
@@ -38,9 +43,9 @@ export default function Mypage() {
                         data={user.username}
                     />
                     <SingleTable
-                        iconName={"faBaseball"}
-                        type={"응원 팀"}
-                        data={rootTeam}
+                    iconName={"faBaseball"}
+                    type={"응원 팀"}
+                    data={rootTeam}
                     />
                     <SingleTable
                         iconName={"faCalendarCheck"}
@@ -54,3 +59,4 @@ export default function Mypage() {
         </div>
     );
 }
+
