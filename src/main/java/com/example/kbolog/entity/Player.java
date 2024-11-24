@@ -1,6 +1,8 @@
 package com.example.kbolog.entity;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 
 @Entity
 public class Player {
@@ -28,4 +30,6 @@ public class Player {
     @JoinColumn(name = "team_id")
     public Team team;
 
+    @OneToMany(mappedBy = "player")
+    private Set<CheerPlayer> cheeredMember;
 }

@@ -21,7 +21,7 @@ public class Team {
     public Year foundedYear;
 
     @ManyToOne
-    @JoinColumn(name = "stadiumId", nullable = false)
+    @JoinColumn(name = "stadium_id", nullable = false)
     public Stadium stadium;
 
 

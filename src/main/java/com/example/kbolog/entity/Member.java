@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,10 +23,13 @@ public class Member {
     public  String password;
 
     @ManyToOne
-    @JoinColumn(name = "teamId")
+    @JoinColumn(name = "team_id")
     public Team rootTeam;
 
     @Column
     public LocalDate rootdate;
+
+    @OneToMany(mappedBy = "member")
+    private Set<CheerPlayer> cheerPlayers;
 
 }
