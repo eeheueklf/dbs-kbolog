@@ -9,6 +9,7 @@ import LogWrite from "./page/Log/LogWrite";
 import LogEdit from "./page/Log/LogEdit";
 import Mypage from "./page/Mypage/Mypage"
 import MypageEdit from "./page/Mypage/MypageEdit"
+import Teampage from "./page/Teampage/Teampage"
 
 
 function App() {
@@ -23,8 +24,9 @@ function App() {
                     <Route path="/log/:id" element={<Log />} />
                     <Route path="/write" element={<LogWrite/>} />
                     <Route path="/edit/:id" element={<LogEdit/>}/>/>
-                    <Route path="/my" element={<Mypage/>} />
+                    <Route path="/mypage" element={<Mypage/>} />
                     <Route path="/my/edit" element={<MypageEdit/>} />
+                    <Route path="/teampage" element={<Teampage/>} />
                 </Routes>
             </BrowserRouter>
         </div>

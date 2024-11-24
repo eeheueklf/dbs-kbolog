@@ -4,10 +4,6 @@ import styles from "./Home.module.css"
 export default function Home() {
     const navigate = useNavigate();
 
-    //환경 변수 설정 필요 - 설정 완료 .env 파일 참조
-    const clientId = process.env.REACT_APP_clientId;
-    const redirectUri = process.env.REACT_APP_redirectUri;
-
     // 로그인 버튼 클릭 핸들러
     const handleLogin = () => {
         navigate("/Signin");

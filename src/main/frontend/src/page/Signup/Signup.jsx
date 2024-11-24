@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import React, {useState} from "react";
 import styles from "./Signup.module.css"
 import axios from "axios"
 
 export default function Signup() {
-    const navigate = useNavigate();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

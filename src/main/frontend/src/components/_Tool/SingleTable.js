@@ -1,6 +1,5 @@
 import React from "react";
-import styles from "./SingleTable.module.css";
-import { useNavigate } from "react-router-dom";
+import styles from "./SingleTable.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationPin, faCalendarCheck, faBaseball } from "@fortawesome/free-solid-svg-icons";
 import { faCircleUser  } from "@fortawesome/free-solid-svg-icons";
@@ -14,7 +13,6 @@ const iconMap = {
 };
 
 export default function SingleTable({ iconName, type, data }) {
-    const navigate = useNavigate();
     console.log(data)
     return (
         <div className={styles.tableWrapper}>
