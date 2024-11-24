@@ -7,7 +7,7 @@ export default function Footer() {
     { href: '/main', icon: faHouse, label: '피드' },
     { href: '/main', icon: faHeart, label: '응원팀' },
     { href: '/main', icon: faUser, label: '선수' },
-    { href: '/main', icon: faGear, label: '설정' },
+    { href: '/my', icon: faGear, label: '설정' },
   ];
 
   return (

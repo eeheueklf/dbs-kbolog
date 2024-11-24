@@ -1,7 +1,13 @@
-package com.example.kbolog.DTO;
+package com.example.kbolog.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class WatchingRequest {
 
+    // Getter and Setter
     private Long gameId;
     private String title;
     private String content;
@@ -10,33 +16,16 @@ public class WatchingRequest {
     // 기본 생성자
     public WatchingRequest() {}
 
-    // Getter and Setter
-    public Long getGameId() {
-        return gameId;
-    }
-
     public void setGameId(Long gameId) {
         this.gameId = gameId;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
-    }
-
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getLocation() {
-        return location;
     }
 
     public void setLocation(String location) {

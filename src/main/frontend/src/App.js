@@ -7,6 +7,7 @@ import Signup from "./page/Signup/Signup";
 import Log from "./page/Log/Log";
 import LogWrite from "./page/Log/LogWrite";
 import LogEdit from "./page/Log/LogEdit";
+import Mypage from "./page/Mypage/Mypage"
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
                     <Route path="/signup" element={<Signup />}/>
                     <Route path="/log/:id" element={<Log />} />
                     <Route path="/write" element={<LogWrite/>} />
-                    <Route path="/edit/:id" element={<LogEdit/>}/>
+                    <Route path="/edit/:id" element={<LogEdit/>}/>/>
+                    <Route path="/my" element={<Mypage/>} />
                 </Routes>
             </BrowserRouter>
         </div>

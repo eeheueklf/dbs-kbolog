@@ -1,6 +1,6 @@
 package com.example.kbolog.controller;
 
-import com.example.kbolog.DTO.WatchingRequest;
+import com.example.kbolog.dto.WatchingRequest;
 import com.example.kbolog.entity.Game;
 import com.example.kbolog.entity.Member;
 import com.example.kbolog.entity.Watching;
@@ -9,7 +9,6 @@ import com.example.kbolog.repository.MemberRepository;
 import com.example.kbolog.repository.WatchingRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import org.springframework.data.repository.config.ResourceReaderRepositoryPopulatorBeanDefinitionParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,6 @@ public class WatchingController {
     @GetMapping(value="/api/watching")
     public ResponseEntity<List<Watching>> getWatchingList(HttpSession session) {
         String username = (String) session.getAttribute("username");
-        System.out.println("Session username: " + username);  // 콘솔에 출력
         if (username == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }

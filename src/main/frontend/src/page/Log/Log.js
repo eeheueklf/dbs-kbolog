@@ -3,7 +3,9 @@ import React, {useEffect, useState} from "react";
 import Footer from "../../components/_Layout/Footer";
 import {useNavigate, useParams} from 'react-router-dom';
 import SingleTable from "../../components/_Tool/SingleTable";
-import Table from "../../components/_Tool/Table";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faMarker, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 
 export default function Log() {
     const [watchingContent, setContent] = useState(null);
@@ -15,6 +17,8 @@ export default function Log() {
     };
 
     const handleLogDelete = () => {
+        /* eslint-disable no-restricted-globals */
+        if(confirm("삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?")===true){
         fetch(`/api/log/delete/${id}`, {
             method: "DELETE",
         })
@@ -29,6 +33,8 @@ export default function Log() {
             .catch((err) => {
                 console.error("Error deleting log:", err);
             });
+        }
+        /* eslint-disable no-restricted-globals */
     };
 
     useEffect(() => {
@@ -49,10 +55,12 @@ export default function Log() {
             <div className={styles.inner}>
                 {watchingContent ? (
                     <div>
+                        <FontAwesomeIcon className={styles.ii} icon={faMarker}  onClick={() => handleLogEdit(id)}/>
+                        <FontAwesomeIcon className={styles.ii} icon={faTrashCan} onClick={() => handleLogDelete(id)}/>
                         <p className={styles.emoji}>{watchingContent.title.slice(0, 2)}</p>
                         <p className={styles.title}>{watchingContent.title.slice(2)}</p>
                         <SingleTable
-                            iconName={"faCalendar"}
+                            iconName={"faCalendarCheck"}
                             type={"날짜"}
                             data={(() => {
                                 const gameDate = new Date(watchingContent.game.gameDate);
@@ -63,7 +71,7 @@ export default function Log() {
                             })()}
                         />
                         <SingleTable
-                            iconName={"faCircleInfo"}
+                            iconName={"faBaseball"}
                             type={"팀"}
                             data={`${watchingContent.game.homeTeam.teamName}vs${watchingContent.game.awayTeam.teamName}`}
                         />
@@ -73,8 +81,6 @@ export default function Log() {
                             data={watchingContent.location}
                         />
                         <p className={styles.content}>{watchingContent.content}</p>
-                        <button onClick={() => handleLogEdit(id)}>수정</button>
-                        <button onClick={() => handleLogDelete(id)}>삭제</button>
                     </div>
                 ) : (
                     <p>Loading...</p>  // 로딩 중

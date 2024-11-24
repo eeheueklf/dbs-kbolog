@@ -33,7 +33,7 @@ html, body {
   width: 700px;
   margin: 3rem auto;
   text-align: left;
-  margin-top:110px;
+  margin-top:100px;
 }
 
 .emoji{
@@ -96,3 +96,17 @@ label {
   background-color: #0056b3;
 }
 
+
+.ii{
+  right:0;
+  width : 15px;
+  text-align: center;
+  color: #575757;
+  padding: 0 5px;
+  cursor:pointer;
+  margin-bottom: 10px;
+}
+
+.ii:hover{
+  color:black;
+}

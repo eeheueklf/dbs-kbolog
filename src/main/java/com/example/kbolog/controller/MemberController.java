@@ -36,7 +36,6 @@ public class MemberController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid password"));
         }
 
-        // 세션에 사용자 정보 저장
         session.setAttribute("username", member.getUsername());
 
         // 로그인 성공 시 200 반환, 응답에 loginUser 포함
@@ -47,6 +46,15 @@ public class MemberController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/api/my")
+    public ResponseEntity<Member> getMyMember(HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+        Member member = memberRepository.findByUsername(username);
+        return ResponseEntity.ok(member);
+    }
 
 
 

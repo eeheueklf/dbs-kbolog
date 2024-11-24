@@ -2,13 +2,15 @@ import React from "react";
 import styles from "./SingleTable.module.css";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationPin, faCalendarCheck, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { faLocationPin, faCalendarCheck, faBaseball } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser  } from "@fortawesome/free-solid-svg-icons";
 
 // 아이콘 매핑
 const iconMap = {
     faTicket: faLocationPin,
-    faCalendar: faCalendarCheck,
-    faCircleInfo: faCircleInfo,
+    faCalendarCheck: faCalendarCheck,
+    faBaseball: faBaseball,
+    faUser: faCircleUser,
 };
 
 export default function SingleTable({ iconName, type, data }) {
