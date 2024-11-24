@@ -10,6 +10,7 @@ import LogEdit from "./page/Log/LogEdit";
 import Mypage from "./page/Mypage/Mypage"
 import MypageEdit from "./page/Mypage/MypageEdit"
 import Teampage from "./page/Teampage/Teampage"
+import Playerpage from "./page/Player/Playerpage";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                     <Route path="/mypage" element={<Mypage/>} />
                     <Route path="/my/edit" element={<MypageEdit/>} />
                     <Route path="/teampage" element={<Teampage/>} />
+                    <Route path="/playerpage" element={<Playerpage/>} />
                 </Routes>
             </BrowserRouter>
         </div>

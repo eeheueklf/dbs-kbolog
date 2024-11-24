@@ -103,7 +103,6 @@ export default function Teampage() {
                  style={{backgroundColor: backgroundColor}}></div>
                 <div className={styles.inner}>
                     <div className={styles.title}>{team.teamName} </div>
-                    <br/>경기 일정<br/><br/>
                     <div className={styles.calendarContainer}>
                         <Calendar
                             onChange={setSelectedDate}
