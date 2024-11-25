@@ -1,0 +1,110 @@
+
+/* Table styles */
+.table {
+    width : 100%;
+    border-spacing: 0;
+    border-bottom: 1px solid #e0e0e0;
+    table-layout: fixed;
+}
+
+.tr {
+    display: flex;
+    cursor:pointer;
+}
+
+.td {
+    padding: 0.4rem 0.6rem;
+    border-right: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 0.875rem;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.tdPlus {
+    padding: 0.4rem 0.6rem;
+    text-align: left;
+    font-size: 0.875rem;
+    color : #959595;
+}
+
+
+.td:last-child{
+    border-right: none;
+}
+
+
+.tr:hover {
+    background-color: #f5f5f5; /* Add hover effect for table rows */
+}
+
+.th:nth-child(1),
+.td:nth-child(1) {
+    flex: 1.5;
+}
+
+.th:nth-child(2),
+.td:nth-child(2){
+    flex: 0.9;
+}
+
+.th:nth-child(3),
+.td:nth-child(3) {
+    flex: 0.4;
+}
+
+.th:nth-child(4),
+.td:nth-child(4),.th:nth-child(5),
+.td:nth-child(5) {
+    flex: 0.7;
+}
+
+/* 팀별 색상 스타일 */
+.kiwoom {
+    background: rgba(87, 5, 20, 0.5);
+}
+
+.doosan {
+    background: rgba(19, 18, 48, 0.5);
+}
+
+.lotte {
+    background: rgba(4, 30, 66, 0.5);
+}
+
+.samsung {
+    background: rgba(7, 76, 161, 0.5);
+}
+
+.hanwha {
+    background: rgba(247, 54, 0, 0.5);
+}
+
+.kia {
+    background: rgba(234, 0, 41, 0.5);
+}
+
+.lg {
+    background: rgba(195, 4, 82, 0.5);
+}
+
+.ssg {
+    background: rgba(206, 14, 45, 0.5);
+}
+
+.nc {
+    background: rgba(49, 82, 136, 0.5);
+}
+
+.kt {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+
+.highlight {
+    border-radius: 3px;
+    padding: 0.1rem 0.3rem;
+    display: inline-block;
+    font-size: 0.777rem;
+}

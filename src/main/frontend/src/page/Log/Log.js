@@ -2,7 +2,7 @@ import styles from "./Log.module.css";
 import React, {useEffect, useState} from "react";
 import Footer from "../../components/_Layout/Footer";
 import {useNavigate, useParams} from 'react-router-dom';
-import SingleTable from "../../components/_Tool/SingleTable";
+import SingleTable from "../../components/_Table/SingleTable";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faMarker, faTrashCan} from "@fortawesome/free-solid-svg-icons";

@@ -1,8 +1,8 @@
 import styles from "./Mainpage.module.css";
 import React, {useEffect, useState} from "react";
 import Footer from "../../components/_Layout/Footer";
-import HeaderImg from "../../image/nail.png";
-import Table from "../../components/_Tool/Table"
+import HeaderImg from "../../image/stadium.jpg";
+import Table from "../../components/_Table/Table"
 
 export default function Mainpage() {
     const [record, setRecord] = useState([]);
@@ -39,8 +39,10 @@ export default function Mainpage() {
                             return `${year}년 ${month}월 ${day}일`;
                         })()}
                         location={data.location}
-                        homeTeam={data.game.homeTeam.sponsor}
-                        awayTeam={data.game.awayTeam.sponsor}
+                        homeTeam={data.game.homeTeam.teamName}
+                        awayTeam={data.game.awayTeam.teamName}
+                        homeSponsor={data.game.homeTeam.sponsor}
+                        awaySponsor={data.game.awayTeam.sponsor}
                     />
                 ))}
                 <Table id={-1}/>
