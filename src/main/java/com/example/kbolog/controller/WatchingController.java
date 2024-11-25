@@ -9,6 +9,8 @@ import com.example.kbolog.repository.MemberRepository;
 import com.example.kbolog.repository.WatchingRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,14 +25,14 @@ public class WatchingController {
     private final WatchingRepository watchingRepository;
     private final MemberRepository memberRepository;
     private final GameRepository gameRepository;
-
+    private final Logger log = LoggerFactory.getLogger(WatchingController.class);
     @GetMapping(value="/api/watching")
     public ResponseEntity<List<Watching>> getWatchingList(HttpSession session) {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
-
+        log.info("========================"+username);
         Member member = memberRepository.findByUsername(username);
         if (member == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);  // 사용자 없으면 404 반환

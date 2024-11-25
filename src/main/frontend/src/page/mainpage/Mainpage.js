@@ -6,9 +6,9 @@ import Table from "../../components/_Tool/Table"
 
 export default function Mainpage() {
     const [record, setRecord] = useState([]);
-
     useEffect(() => {
         fetch("/api/watching")
+
             .then(res=>res.json())
             .then(res=> {
                 setRecord(res);

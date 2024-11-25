@@ -2,7 +2,7 @@ import styles from "./Playerpage.module.css";
 import React, {useEffect, useState} from "react";
 import Footer from "../../components/_Layout/Footer";
 import HeaderImg from "../../image/nail.png";
-import Table from "../../components/_Tool/Table"
+import PlayerTable from "../../components/_Tool/PlayerTable";
 
 export default function Playerpage() {
     const [player, setPlayer] = useState([]);
@@ -29,12 +29,14 @@ export default function Playerpage() {
                 <div className={styles.title}>관심 선수</div>
                 <br/><br/>
                 {player.map(data => (
-                    <Table
-                        id={data.playerId}
-                        title={data.playerName}
+                    <PlayerTable
+                        pId={data.playerId}
+                        pName={data.playerName}
+                        pNum={data.playerNumber}
+                        pPosition={data.playerPosition}
                     />
                 ))}
-                <Table id={-1}/>
+                <PlayerTable pId={-1}/>
 
             </div>
             <Footer/>

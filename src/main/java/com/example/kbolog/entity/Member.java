@@ -1,5 +1,6 @@
 package com.example.kbolog.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +31,7 @@ public class Member {
     public LocalDate rootdate;
 
     @OneToMany(mappedBy = "member")
+    @JsonManagedReference
     private Set<CheerPlayer> cheerPlayers;
 
 }
