@@ -1,6 +1,7 @@
 package com.example.kbolog.controller;
 
-import com.example.kbolog.dto.WatchingRequest;
+import com.example.kbolog.Request.WatchingRequest;
+import com.example.kbolog.dto.WatchingDTO;
 import com.example.kbolog.entity.Game;
 import com.example.kbolog.entity.Member;
 import com.example.kbolog.entity.Watching;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
@@ -25,14 +27,14 @@ public class WatchingController {
     private final WatchingRepository watchingRepository;
     private final MemberRepository memberRepository;
     private final GameRepository gameRepository;
-    private final Logger log = LoggerFactory.getLogger(WatchingController.class);
+
     @GetMapping(value="/api/watching")
-    public ResponseEntity<List<Watching>> getWatchingList(HttpSession session) {
+    public ResponseEntity<List<WatchingDTO>> getWatchingList(HttpSession session) {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
-        log.info("========================"+username);
+
         Member member = memberRepository.findByUsername(username);
         if (member == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);  // 사용자 없으면 404 반환
@@ -45,21 +47,27 @@ public class WatchingController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        return ResponseEntity.ok(records);
+        // Watching 리스트를 WatchingDTO 리스트로 변환하여 반환
+        List<WatchingDTO> watchingDTOs = records.stream()
+                .map(WatchingDTO::new)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(watchingDTOs);
     }
 
     @GetMapping(value="/api/log/{id}")
-    public ResponseEntity<Watching> getWatchingContent(@PathVariable Long id){
+    public ResponseEntity<WatchingDTO> getWatchingContent(@PathVariable Long id){
         Watching watching = watchingRepository.findById(id).orElse(null);
 
         if(watching == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-        return ResponseEntity.ok(watching);
+
+        return ResponseEntity.ok(new WatchingDTO(watching));
     }
 
     @PostMapping("/api/log/write")
-    public void logWrite(@RequestBody WatchingRequest request, HttpSession session) {
+    public ResponseEntity<String> logWrite(@RequestBody WatchingRequest request, HttpSession session) {
         String username = (String) session.getAttribute("username");
 
         Game game = gameRepository.findById(request.getGameId()).orElse(null);
@@ -75,23 +83,21 @@ public class WatchingController {
             watching.setLocation(request.getLocation());
 
             watchingRepository.save(watching);
+            return ResponseEntity.ok("Log created successfully");
         }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid game or user");
     }
-    @PutMapping("/api/log/edit/{id}")
-    public ResponseEntity<String> logEdit(
-            @PathVariable Long id, // 수정할 로그의 ID
-            @RequestBody WatchingRequest request, // 클라이언트로부터 받은 수정 데이터
-            HttpSession session) {
 
+    @PutMapping("/api/log/edit/{id}")
+    public ResponseEntity<String> logEdit(@PathVariable Long id, @RequestBody WatchingRequest request, HttpSession session) {
         String username = (String) session.getAttribute("username");
 
         Game game = gameRepository.findById(request.getGameId()).orElse(null);
         Member user = memberRepository.findByUsername(username);
 
-        // 로그가 존재하고, 게임과 사용자가 유효한 경우에만 처리
         if (game != null && user != null) {
             // 수정할 Watching 객체 찾아오기
-            Watching existingWatching = watchingRepository.findByWatchingId(id)
+            Watching existingWatching = watchingRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Log not found"));
 
             // 기존 데이터 수정
@@ -103,30 +109,24 @@ public class WatchingController {
 
             // 수정된 데이터를 저장
             watchingRepository.save(existingWatching);
-
             return ResponseEntity.ok("Log updated successfully");
         } else {
-            return ResponseEntity.status(400).body("Invalid game or user");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid game or user");
         }
     }
 
     @DeleteMapping("/api/log/delete/{id}")
     public ResponseEntity<String> logDelete(@PathVariable Long id, HttpSession session) {
-
-        // 세션에서 사용자 이름 가져오기
         String username = (String) session.getAttribute("username");
 
-        // 삭제할 로그 찾기
         Watching existingWatching = watchingRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Log not found"));
 
-        // 사용자와 로그 작성자가 일치하는지 확인
         if (existingWatching.getUser().getUsername().equals(username)) {
-            // 로그 삭제
             watchingRepository.delete(existingWatching);
             return ResponseEntity.ok("Log deleted successfully");
         } else {
-            return ResponseEntity.status(403).body("You do not have permission to delete this log");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have permission to delete this log");
         }
     }
 

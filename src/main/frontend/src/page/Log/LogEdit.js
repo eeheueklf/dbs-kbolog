@@ -137,7 +137,7 @@ export default function LogEdit() {
                                 </option>
                                 {games.map((game) => (
                                     <option key={game.gameId} value={game.gameId}>
-                                        {`${game.homeTeam.teamName} vs ${game.awayTeam.teamName}`}
+                                        {`${game.homeTeamName} vs ${game.awayTeamName}`}
                                     </option>
                                 ))}
                             </select>

@@ -12,20 +12,10 @@
 }
 
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box
-}
 
-html, body {
-  min-height: 100vh;
-  margin: 0 auto;
-}
 
 .default {
   width: 1000px;
-  height: 100vh; /* 그대로 유지 */
   margin: 0 auto;
 }
 

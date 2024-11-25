@@ -25,13 +25,13 @@ export default function Teampage() {
         fetch("/api/my")
             .then(res => res.json())
             .then(res => {
-                setTeam(res.rootTeam)
+                setTeam(res);
             })
             .catch((err) => {
                 console.error("API fetch error:", err); // 에러 처리
             });
 
-        switch (team.sponsor) {
+        switch (team.rootTeamSponsor) {
             case "기아":
                 setBackgroundColor("#F73600"); // 기아의 배경색
                 break;
@@ -44,7 +44,7 @@ export default function Teampage() {
             default:
                 setBackgroundColor("#f0f0f0"); // 기본 배경색
         }
-    }, [team.sponsor]);
+    }, [team.rootTeamSponsor]);
 
     useEffect(() => {
         const selectedDate = new Date();
@@ -58,7 +58,7 @@ export default function Teampage() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                teamId: team.teamId,
+                teamId: team.rootTeamId,
                 start: startOfMonth,
                 end: endOfMonth,
             })})
@@ -71,7 +71,7 @@ export default function Teampage() {
                 }
             })
             .catch((err) => console.error("Failed to fetch game data:", err));
-    }, [selectedDate, team.teamId]);
+    }, [selectedDate, team.id]);
 
     const gamesByDate = gameData.reduce((acc, game) => {
         const gameDate = formatDate(game.gameDate); // Assuming the game date is in `game.date`
@@ -89,7 +89,7 @@ export default function Teampage() {
                 {gamesOnDate.map((game, index) => {
                     return (
                         <div key={index} className={styles.game}>
-                            {game.awayTeam.sponsor} vs {game.homeTeam.sponsor}
+                            {game.awayTeamSponsor} vs {game.homeTeamSponsor}
                         </div>
                     );
                 })}
@@ -102,7 +102,7 @@ export default function Teampage() {
             <div className={styles.cropping}
                  style={{backgroundColor: backgroundColor}}></div>
                 <div className={styles.inner}>
-                    <div className={styles.title}>{team.teamName} </div>
+                    <div className={styles.title}>{team.rootTeamName} </div>
                     <div className={styles.calendarContainer}>
                         <Calendar
                             onChange={setSelectedDate}

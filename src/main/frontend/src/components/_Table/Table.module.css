@@ -21,6 +21,16 @@
     overflow:hidden;
     white-space:nowrap;
 }
+/*Nav*/
+.tdNav {
+    padding: 0.4rem 0.6rem;
+    text-align: left;
+    font-size: 0.875rem;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    color : #616161;
+}
 
 .tdPlus {
     padding: 0.4rem 0.6rem;
@@ -30,7 +40,8 @@
 }
 
 
-.td:last-child{
+.td:last-child,
+.tdNav:last-child{
     border-right: none;
 }
 
@@ -39,23 +50,23 @@
     background-color: #f5f5f5; /* Add hover effect for table rows */
 }
 
-.th:nth-child(1),
+.tdNav:nth-child(1),
 .td:nth-child(1) {
     flex: 1.5;
 }
 
-.th:nth-child(2),
+.tdNav:nth-child(2),
 .td:nth-child(2){
     flex: 0.9;
 }
 
-.th:nth-child(3),
+.tdNav:nth-child(3),
 .td:nth-child(3) {
     flex: 0.4;
 }
 
-.th:nth-child(4),
-.td:nth-child(4),.th:nth-child(5),
+.tdNav:nth-child(4),
+.td:nth-child(4),.tdNav:nth-child(5),
 .td:nth-child(5) {
     flex: 0.7;
 }

@@ -1,13 +1,12 @@
 package com.example.kbolog.controller;
 
+import com.example.kbolog.dto.MemberDTO;
 import com.example.kbolog.entity.Member;
 import com.example.kbolog.entity.Team;
 import com.example.kbolog.repository.MemberRepository;
 import com.example.kbolog.repository.TeamRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,20 +52,24 @@ public class MemberController {
     }
 
     @GetMapping("/api/my")
-    public ResponseEntity<Member> getMyMember(HttpSession session) {
+    public ResponseEntity<MemberDTO> getMyMember(HttpSession session) {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
         Member member = memberRepository.findByUsername(username);
-        return ResponseEntity.ok(member);
+        if (member == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        // Convert Member to MemberDTO
+        MemberDTO memberDTO = new MemberDTO(member);
+        return ResponseEntity.ok(memberDTO);
     }
-    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 
     // 응원 팀 선택/수정
     @PostMapping("/api/my/selectTeam")
-    public ResponseEntity<?> selectTeam(@RequestBody String sponsor, HttpSession session) {
+    public ResponseEntity<String> selectTeam(@RequestBody String sponsor, HttpSession session) {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             return ResponseEntity.status(401).body("Unauthorized");

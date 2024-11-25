@@ -1,4 +1,4 @@
-package com.example.kbolog.dto;
+package com.example.kbolog.Request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,28 +7,15 @@ import lombok.Setter;
 @Setter
 public class WatchingRequest {
 
-    // Getter and Setter
     private Long gameId;
     private String title;
     private String content;
     private String location;
 
-    // 기본 생성자
-    public WatchingRequest() {}
-
-    public void setGameId(Long gameId) {
+    public WatchingRequest(Long gameId, String title, String content, String location) {
         this.gameId = gameId;
-    }
-
-    public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setContent(String content) {
         this.content = content;
-    }
-
-    public void setLocation(String location) {
         this.location = location;
     }
 }

@@ -1,8 +1,10 @@
 package com.example.kbolog.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
+@Getter
 public class Stadium {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

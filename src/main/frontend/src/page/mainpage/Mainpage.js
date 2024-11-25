@@ -27,22 +27,23 @@ export default function Mainpage() {
             <div className={styles.inner}>
                 <div className={styles.title}>2024 KBO</div>
                 <br/>다가오는 경기 - 추후 기능 추가<br/><br/>
+                <Table id={0}/>
                 {record.map(data => (
                     <Table
                         id={data.watchingId}
                         title={data.title}
                         date={(() => {
-                            const gameDate = new Date(data.game.gameDate);
+                            const gameDate = new Date(data.watchingDate);
                             const year = gameDate.getFullYear();
                             const month = String(gameDate.getMonth() + 1).padStart(2, '0');  // getMonth() returns 0-11
                             const day = String(gameDate.getDate()).padStart(2, '0');
                             return `${year}년 ${month}월 ${day}일`;
                         })()}
                         location={data.location}
-                        homeTeam={data.game.homeTeam.teamName}
-                        awayTeam={data.game.awayTeam.teamName}
-                        homeSponsor={data.game.homeTeam.sponsor}
-                        awaySponsor={data.game.awayTeam.sponsor}
+                        homeTeam={data.homeTeam}
+                        awayTeam={data.awayTeam}
+                        homeSponsor={data.homeTeamSponsor}
+                        awaySponsor={data.awayTeamSponsor}
                     />
                 ))}
                 <Table id={-1}/>

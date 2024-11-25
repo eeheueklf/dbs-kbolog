@@ -5,10 +5,10 @@ import {useNavigate, useParams} from 'react-router-dom';
 import SingleTable from "../../components/_Table/SingleTable";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faMarker, faTrashCan} from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare,faCircleXmark} from "@fortawesome/free-regular-svg-icons";
 
 export default function Log() {
-    const [watchingContent, setContent] = useState(null);
+    const [wLog, setWLog] = useState(null);
     const { id } = useParams();
     const navigate = useNavigate();
     const handleLogEdit = (id) => {
@@ -40,10 +40,10 @@ export default function Log() {
         fetch(`/api/log/${id}`)
             .then(res=>res.json())
             .then((data) => {
-                setContent(data);  // 관람 기록 데이터를 상태에 저장
+                setWLog(data);
             })
             .catch((err) => {
-                console.error("API fetch error:", err); // 에러 처리
+                console.error("API fetch error:", err);
             });
     }, []);
 
@@ -52,17 +52,17 @@ export default function Log() {
             <div className={styles.cropping}>
             </div>
             <div className={styles.inner}>
-                {watchingContent ? (
+                {wLog ? (
                     <div>
-                        <FontAwesomeIcon className={styles.ii} icon={faMarker}  onClick={() => handleLogEdit(id)}/>
-                        <FontAwesomeIcon className={styles.ii} icon={faTrashCan} onClick={() => handleLogDelete(id)}/>
-                        <p className={styles.emoji}>{watchingContent.title.slice(0, 2)}</p>
-                        <p className={styles.title}>{watchingContent.title.slice(2)}</p>
+                        <FontAwesomeIcon className={styles.ii} icon={faPenToSquare}  onClick={() => handleLogEdit(id)}/>
+                        <FontAwesomeIcon className={styles.ii} icon={faCircleXmark} onClick={() => handleLogDelete(id)}/>
+                        <p className={styles.emoji}>{wLog.title.slice(0, 2)}</p>
+                        <p className={styles.title}>{wLog.title.slice(2)}</p>
                         <SingleTable
                             iconName={"faCalendarCheck"}
                             type={"날짜"}
                             data={(() => {
-                                const gameDate = new Date(watchingContent.game.gameDate);
+                                const gameDate = new Date(wLog.watchingDate);
                                 const year = gameDate.getFullYear();
                                 const month = String(gameDate.getMonth() + 1).padStart(2, '0');  // getMonth() returns 0-11
                                 const day = String(gameDate.getDate()).padStart(2, '0');
@@ -72,14 +72,14 @@ export default function Log() {
                         <SingleTable
                             iconName={"faBaseball"}
                             type={"팀"}
-                            data={`${watchingContent.game.homeTeam.teamName}vs${watchingContent.game.awayTeam.teamName}`}
+                            data={`${wLog.homeTeam}vs${wLog.awayTeam}`}
                         />
                         <SingleTable
                             iconName={"faTicket"}
                             type={"위치"}
-                            data={watchingContent.location}
+                            data={wLog.location}
                         />
-                        <p className={styles.content}>{watchingContent.content}</p>
+                        <p className={styles.content}>{wLog.content}</p>
                     </div>
                 ) : (
                     <p>Loading...</p>  // 로딩 중

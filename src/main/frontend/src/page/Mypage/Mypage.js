@@ -4,7 +4,7 @@ import Footer from "../../components/_Layout/Footer";
 import SingleTable from "../../components/_Table/SingleTable";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMarker} from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare} from "@fortawesome/free-regular-svg-icons";
 import {useNavigate} from "react-router-dom";
 
 export default function Mypage() {
@@ -19,7 +19,6 @@ export default function Mypage() {
             .then(res => res.json())
             .then(res => {
                 setUser(res);
-                setRootTeam(res.rootTeam.teamName)
             })
             .catch((err) => {
                 console.error("API fetch error:", err); // 에러 처리
@@ -34,7 +33,7 @@ export default function Mypage() {
             </div>
             <div className={styles.inner}>
                 <div>
-                    <FontAwesomeIcon className={styles.ii} icon={faMarker} onClick={handleLogEdit}/>
+                    <FontAwesomeIcon className={styles.ii} icon={faPenToSquare} onClick={handleLogEdit}/>
                     <p className={styles.emoji}>💟</p>
                     <p className={styles.title}>마이페이지</p>
                     <SingleTable
@@ -45,12 +44,12 @@ export default function Mypage() {
                     <SingleTable
                     iconName={"faBaseball"}
                     type={"응원 팀"}
-                    data={rootTeam}
+                    data={user.rootTeamName}
                     />
                     <SingleTable
                         iconName={"faCalendarCheck"}
                         type={"응원 날짜"}
-                        data={user.rootdate}
+                        data={user.rootDate}
                     />
                     <p className={styles.content}></p>
                 </div>

@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./SingleTable.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationPin} from "@fortawesome/free-solid-svg-icons";
-import { faAddressCard, faCalendar, faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faLocationPin, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faCalendar} from "@fortawesome/free-regular-svg-icons";
 
 // 아이콘 매핑
 const iconMap = {
@@ -13,7 +13,6 @@ const iconMap = {
 };
 
 export default function SingleTable({ iconName, type, data }) {
-    console.log(data)
     return (
         <div className={styles.tableWrapper}>
             <table className={styles.table}>

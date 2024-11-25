@@ -1,6 +1,7 @@
 package com.example.kbolog.controller;
 
 
+import com.example.kbolog.dto.CheerPlayerDTO;
 import com.example.kbolog.entity.CheerPlayer;
 import com.example.kbolog.entity.Member;
 import com.example.kbolog.entity.Player;
@@ -24,8 +25,8 @@ public class CheerPlayerController {
     private final MemberRepository memberRepository;
     private final CheerPlayerRepository cheerPlayerRepository;
 
-    @GetMapping("/api/cheerplayer")
-    public ResponseEntity<List<Player>> getCheerPlayer(HttpSession session) {
+    @GetMapping("/api/player/cheer")
+    public ResponseEntity<List<CheerPlayerDTO>> getCheerPlayer(HttpSession session) {
         String username = (String) session.getAttribute("username");
         Member member = memberRepository.findByUsername(username);
         if(member == null) {
@@ -38,10 +39,10 @@ public class CheerPlayerController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        List<Player> players = cheerPlayer.stream()
-                .map(CheerPlayer::getPlayer) // CheerPlayer에서 Player 추출
+        List<CheerPlayerDTO> response  = cheerPlayer.stream()
+                .map(CheerPlayerDTO::new)
                 .toList();
 
-        return ResponseEntity.ok(players);
+        return ResponseEntity.ok(response);
     }
 }
