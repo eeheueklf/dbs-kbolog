@@ -43,7 +43,6 @@ export default function Mypage() {
         .then((res) => {
             alert("팀 선택 완료!");
             navigate('/mypage');
-            return res.json();
         })
     };
 

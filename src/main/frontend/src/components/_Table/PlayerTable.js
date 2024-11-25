@@ -3,7 +3,7 @@ import styles from "./PlayerTable.module.css";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListOl, faCrosshairs, faSitemap } from "@fortawesome/free-solid-svg-icons";
-import { faHeart, faSquarePlus } from "@fortawesome/free-regular-svg-icons";
+import { faHeart, faSquarePlus, faCalendar } from "@fortawesome/free-regular-svg-icons";
 import {getTeamClass} from "./Table"
 
 function getPosition(pPosition) {
@@ -20,12 +20,12 @@ function getPosition(pPosition) {
 
     return "";
 }
-export default function PlayerTable({ pId, pName, pNum, pPosition, pTeam, pSponsor}) {
+export default function PlayerTable({ pId, pName, pNum, pPosition, pTeam, pSponsor, cheerDate}) {
     const navigate = useNavigate();
 
     // 테이블 행 클릭 시 실행되는 함수
     const handleRowClick = (pId) => {
-        navigate(`/log/${pId}`);
+        navigate(`/about/player/${pId}`);
     };
 
     const handleWriteLog = () => {
@@ -66,6 +66,9 @@ export default function PlayerTable({ pId, pName, pNum, pPosition, pTeam, pSpons
                         <td className={styles.tdNav}>
                             <FontAwesomeIcon className={styles.ii} icon={faSitemap}/> 소속팀
                         </td>
+                        <td className={styles.tdNav}>
+                            <FontAwesomeIcon className={styles.ii} icon={faCalendar}/> 관심일
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -86,6 +89,7 @@ export default function PlayerTable({ pId, pName, pNum, pPosition, pTeam, pSpons
                                 {pTeam}
                             </span>
                     </td>
+                    <td className={styles.td}>{cheerDate}</td>
                 </tr>
                 </tbody>
             </table>

@@ -73,43 +73,48 @@
 
 /* 팀별 색상 스타일 */
 .kiwoom {
-    background: rgba(87, 5, 20, 0.5);
+    background: rgba(87, 5, 20, 0.6);
+    color : white;
 }
 
 .doosan {
-    background: rgba(19, 18, 48, 0.5);
+    background: rgba(19, 18, 48, 0.6);
+    color : white;
 }
 
 .lotte {
-    background: rgba(4, 30, 66, 0.5);
+    background: rgba(4, 30, 66, 0.4);
 }
 
 .samsung {
-    background: rgba(7, 76, 161, 0.5);
+    background: rgba(7, 76, 161, 0.6);
+    color : white;
 }
 
 .hanwha {
-    background: rgba(247, 54, 0, 0.5);
+    background: rgba(247, 54, 0, 0.4);
 }
 
 .kia {
-    background: rgba(234, 0, 41, 0.5);
+    background: rgba(234, 0, 41, 0.4);
 }
 
 .lg {
-    background: rgba(195, 4, 82, 0.5);
+    background: rgba(195, 4, 82, 0.4);
 }
 
 .ssg {
-    background: rgba(206, 14, 45, 0.5);
+    background: rgba(206, 14, 45, 0.6);
+    color : white;
 }
 
 .nc {
-    background: rgba(49, 82, 136, 0.5);
+    background: rgba(49, 82, 136, 0.4);
 }
 
 .kt {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
+    color : white;
 }
 
 

@@ -12,7 +12,6 @@ export default function Playerpage() {
             .then(res=>res.json())
             .then(data=> {
                 setPlayer(data);
-                console.log(data);
             })
             .catch((err) => {
                 console.error("API fetch error:", err); // 에러 처리
@@ -29,16 +28,28 @@ export default function Playerpage() {
                 <div className={styles.title}>관심 선수</div>
                 <br/>
                 <PlayerTable pId={0}/>
-                {/*{player.map(data => (*/}
-                {/*    <PlayerTable*/}
-                {/*        pId={data.playerId}*/}
-                {/*        pName={data.playerName}*/}
-                {/*        pNum={data.playerNumber}*/}
-                {/*        pPosition={data.playerPosition}*/}
-                {/*        pTeam={data.teamName}*/}
-                {/*        pSponsor={data.sponsor}*/}
-                {/*    />*/}
-                {/*))}*/}
+                {player.map(data => {
+                    // cheerDate를 Date 객체로 변환
+                    const cheerDate = new Date(data.cheerDate);
+                    const today = new Date();
+
+                    // 밀리초 단위로 차이 계산 후, 일 단위로 변환
+                    const diffInMs = today - cheerDate; // 밀리초 차이
+                    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24)); // 일 단위
+
+                    return (
+                        <PlayerTable
+                            pId={data.playerId}
+                            pName={data.playerName}
+                            pNum={data.playerNumber}
+                            pPosition={data.playerPosition}
+                            pTeam={data.teamName}
+                            pSponsor={data.teamSponsor}
+                            cheerDate={`${diffInDays}일`}
+                        />
+                        );
+                    })
+                }
                 <PlayerTable pId={-1}/>
 
             </div>

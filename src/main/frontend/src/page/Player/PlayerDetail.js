@@ -1,45 +1,53 @@
-import styles from "./Playerpage.module.css";
+import styles from "./PlayerDetail.module.css";
 import React, {useEffect, useState} from "react";
 import Footer from "../../components/_Layout/Footer";
-import HeaderImg from "../../image/playerHeader.jpg";
-import PlayerTable from "../../components/_Table/PlayerTable";
+import {useNavigate, useParams} from 'react-router-dom';
+import SingleTable from "../../components/_Table/SingleTable";
 
-export default function Playerpage() {
-    const [player, setPlayer] = useState([]);
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare,faCircleXmark} from "@fortawesome/free-regular-svg-icons";
+
+export default function PlayerDetail() {
+    const [wLog, setWLog] = useState(null);
+    const { pId } = useParams();
 
     useEffect(() => {
-        fetch("/api/cheerplayer")
+        fetch(`/api/player/${pId}`)
             .then(res=>res.json())
-            .then(data=> {
-                setPlayer(data);
-                console.log(data);
+            .then((data) => {
+                setWLog(data);
+                console.log(data)
             })
             .catch((err) => {
-                console.error("API fetch error:", err); // 에러 처리
+                console.error("API fetch error:", err);
             });
     }, []);
-
 
     return (
         <div className={styles.default}>
             <div className={styles.cropping}>
-                <img className={styles.headerImg} src={HeaderImg} alt="Header" />
             </div>
             <div className={styles.inner}>
-                <div className={styles.title}>관심 선수</div>
-                <br/>
-                <PlayerTable pId={0}/>
-                {player.map(data => (
-                    <PlayerTable
-                        pId={data.playerId}
-                        pName={data.playerName}
-                        pNum={data.playerNumber}
-                        pPosition={data.playerPosition}
-                        pTeam={data.team.teamName}
-                        pSponsor={data.team.sponsor}
-                    />
-                ))}
-                <PlayerTable pId={-1}/>
+                {wLog ? (
+                    <div>
+                        {/* <p className={styles.emoji}>{wLog.title.slice(0, 2)}</p>*/}
+                        {/*<p className={styles.title}>{wLog.title.slice(2)}</p>*/}
+
+                        {/*<SingleTable*/}
+                        {/*    iconName={"faBaseball"}*/}
+                        {/*    type={"팀"}*/}
+                        {/*    data={`${wLog.homeTeam}vs${wLog.awayTeam}`}*/}
+                        {/*/>*/}
+                        {/*<SingleTable*/}
+                        {/*    iconName={"faTicket"}*/}
+                        {/*    type={"위치"}*/}
+                        {/*    data={wLog.location}*/}
+                        {/*/>*/}
+                        {/*<p className={styles.content}>{wLog.content}</p>*/}
+                    </div>
+                ) : (
+                    <p>Loading...</p>  // 로딩 중
+                )}
 
             </div>
             <Footer/>

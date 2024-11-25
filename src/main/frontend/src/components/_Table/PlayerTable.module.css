@@ -52,65 +52,20 @@
     background-color: #f5f5f5; /* Add hover effect for table rows */
 }
 .tdNav:nth-child(1),
-.td:nth-child(1) {
+.td:nth-child(1),
+.tdNav:nth-child(5),
+.td:nth-child(5),
+.tdNav:nth-child(2),
+.td:nth-child(2),
+.tdNav:nth-child(3),
+.td:nth-child(3) {
     flex: 0.3;
 }
 
 
-.tdNav:nth-child(2),
-.td:nth-child(2),
-.tdNav:nth-child(3),
-.td:nth-child(3)  {
-    flex: 0.19;
-}
-
-
 .tdNav:nth-child(4),
-.td:nth-child(4),
-.tdNav:nth-child(5),
-.td:nth-child(5) {
+.td:nth-child(4){
     flex: 1;
-}
-
-/* 팀별 색상 스타일 */
-.kiwoom {
-    background: rgba(87, 5, 20, 0.5);
-}
-
-.doosan {
-    background: rgba(19, 18, 48, 0.5);
-}
-
-.lotte {
-    background: rgba(4, 30, 66, 0.5);
-}
-
-.samsung {
-    background: rgba(7, 76, 161, 0.5);
-}
-
-.hanwha {
-    background: rgba(247, 54, 0, 0.5);
-}
-
-.kia {
-    background: rgba(234, 0, 41, 0.5);
-}
-
-.lg {
-    background: rgba(195, 4, 82, 0.5);
-}
-
-.ssg {
-    background: rgba(206, 14, 45, 0.5);
-}
-
-.nc {
-    background: rgba(49, 82, 136, 0.5);
-}
-
-.kt {
-    background: rgba(0, 0, 0, 0.5);
 }
 
 
@@ -120,3 +75,4 @@
     display: inline-block;
     font-size: 0.777rem;
 }
+
