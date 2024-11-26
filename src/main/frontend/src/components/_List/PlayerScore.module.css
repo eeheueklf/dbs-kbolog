@@ -1,0 +1,43 @@
+.playerScore {
+    position: relative;
+    /*z-index: 1;*/
+    /*width: 1200px;*/
+}
+.playerScore li {
+    float: left;
+    width: 120px;
+    height: 114px;
+    margin-right: 5px;
+    padding: 15px 5px;
+    box-sizing: border-box;
+    background: url(../../image/pitcher_view_score.png) no-repeat 0 0;
+    background-size: 100% 100%;
+    border-radius: 7px;
+    overflow: hidden;
+    text-align: center;
+    font-family: "kiaM", sans-serif;
+    font-weight: 700;
+}
+.playerScore li:last-of-type {
+    margin-right: 0;
+}
+.playerScore li > span {
+    display: block;
+    font-size: 18px;
+    color: #e4e5e6;
+}
+.playerScore li > span:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin: 5px auto 0;
+    background: #525765;
+}
+.playerScore li > strong {
+    display: block;
+    text-align: center;
+    padding-top: 8px;
+    font-size: 34px;
+    color: #fff;
+}

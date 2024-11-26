@@ -12,7 +12,7 @@ export default function Mypage() {
     const [rootTeam, setRootTeam] = useState([]);
     const navigate = useNavigate();
     const handleLogEdit = () => {
-        navigate(`/my/edit`);
+        navigate(`/profile/edit`);
     };
     useEffect(() => {
         fetch("/api/my")

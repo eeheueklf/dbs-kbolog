@@ -6,7 +6,7 @@ import { faListOl, faCrosshairs, faSitemap } from "@fortawesome/free-solid-svg-i
 import { faHeart, faSquarePlus, faCalendar } from "@fortawesome/free-regular-svg-icons";
 import {getTeamClass} from "./Table"
 
-function getPosition(pPosition) {
+export function getPosition(pPosition) {
     if (pPosition === 1) return "투수";
     if (pPosition === 2) return "포수";
     if (pPosition === 3) return "1루수";
@@ -25,11 +25,11 @@ export default function PlayerTable({ pId, pName, pNum, pPosition, pTeam, pSpons
 
     // 테이블 행 클릭 시 실행되는 함수
     const handleRowClick = (pId) => {
-        navigate(`/about/player/${pId}`);
+        navigate(`/players/detail/${pId}`);
     };
 
     const handleWriteLog = () => {
-        navigate('/write');
+        navigate('/players');
     }
     if (pId === -1) {
         return (
@@ -40,7 +40,7 @@ export default function PlayerTable({ pId, pName, pNum, pPosition, pTeam, pSpons
                         onClick={handleWriteLog}>
                         <td className={styles.tdPlus}>
                             <FontAwesomeIcon className={styles.ii} icon={faSquarePlus}/>
-                            <span> 관심 선수 추가</span>
+                            <span> 선수 탐색 하기</span>
                         </td>
                     </tr>
                     </tbody>

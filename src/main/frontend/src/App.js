@@ -20,17 +20,17 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/main" element={<Main />} />
+                    <Route path="/dashboard" element={<Main />} />
                     <Route path="/signin" element={<Signin />}/>
                     <Route path="/signup" element={<Signup />}/>
-                    <Route path="/log/:id" element={<Log />} />
-                    <Route path="/write" element={<LogWrite/>} />
-                    <Route path="/edit/:id" element={<LogEdit/>}/>/>
-                    <Route path="/mypage" element={<Mypage/>} />
-                    <Route path="/my/edit" element={<MypageEdit/>} />
-                    <Route path="/teampage" element={<Teampage/>} />
-                    <Route path="/playerpage" element={<Playerpage/>} />
-                    <Route path="/about/player/:pId" element={<PlayerDetail />} />
+                    <Route path="/log/detail/:id" element={<Log />} />
+                    <Route path="/log/create" element={<LogWrite/>} />
+                    <Route path="/log/edit/:id" element={<LogEdit/>}/>/>
+                    <Route path="/profile" element={<Mypage/>} />
+                    <Route path="/profile/edit" element={<MypageEdit/>} />
+                    <Route path="/team/fav" element={<Teampage/>} />
+                    <Route path="/players/fav" element={<Playerpage/>} />
+                    <Route path="/players/detail/:pId" element={<PlayerDetail />} />
                 </Routes>
             </BrowserRouter>
         </div>

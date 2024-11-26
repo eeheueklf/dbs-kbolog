@@ -1,11 +1,16 @@
 package com.example.kbolog.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
+@Getter
 public class Hitter {
 
     @Id
+    private Long playerId;
+
+    @MapsId
     @OneToOne
     @JoinColumn(name = "player_id")
     public Player player;

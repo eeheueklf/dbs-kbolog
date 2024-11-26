@@ -25,7 +25,7 @@ export default function Signin() {
             sessionStorage.setItem("username", loggedInUser);
 
             console.log("로그인 성공:", response.data.message);
-            navigate('/main');
+            navigate('/dashboard');
 
         } catch (err) {
             if (err.response) {

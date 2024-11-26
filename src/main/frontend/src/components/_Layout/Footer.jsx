@@ -4,10 +4,10 @@ import { faHouse, faHeart, faUser, faGear } from '@fortawesome/free-solid-svg-ic
 
 export default function Footer() {
   const menuItems = [
-    { href: '/main', icon: faHouse, label: '피드' },
-    { href: '/teampage', icon: faHeart, label: '응원팀' },
-    { href: '/playerpage', icon: faUser, label: '선수' },
-    { href: '/mypage', icon: faGear, label: '설정' },
+    { href: '/dashboard', icon: faHouse, label: '피드' },
+    { href: '/team/fav', icon: faHeart, label: '응원팀' },
+    { href: '/players/fav', icon: faUser, label: '선수' },
+    { href: '/profile', icon: faGear, label: '설정' },
   ];
 
   return (

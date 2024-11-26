@@ -2,10 +2,10 @@ package com.example.kbolog.controller;
 
 import com.example.kbolog.dto.PlayerDTO;
 import com.example.kbolog.dto.WatchingDTO;
-import com.example.kbolog.entity.Member;
-import com.example.kbolog.entity.Player;
-import com.example.kbolog.entity.Watching;
+import com.example.kbolog.entity.*;
+import com.example.kbolog.repository.HitterRepository;
 import com.example.kbolog.repository.MemberRepository;
+import com.example.kbolog.repository.PitcherRepository;
 import com.example.kbolog.repository.PlayerRepository;
 import com.example.kbolog.service.PlayerService;
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +24,8 @@ public class PlayerController {
     private final PlayerService playerService;
     private final MemberRepository memberRepository;
     private final PlayerRepository playerRepository;
+    private final PitcherRepository pitcherRepository;
+    private final HitterRepository hitterRepository;
 
     @GetMapping("/api/player/cheer")
     public ResponseEntity<List<PlayerDTO>> getCheeredPlayers(HttpSession session) {
@@ -41,15 +43,27 @@ public class PlayerController {
         return ResponseEntity.ok(playerDTOs);
     }
 
-    @GetMapping(value="/api/player/{pId}")
-    public ResponseEntity<PlayerDTO> getWatchingContent(@PathVariable Long pId){
+    @GetMapping(value = "/api/player/{pId}")
+    public ResponseEntity<PlayerDTO> getPlayerDetails(@PathVariable Long pId) {
         Player player = playerRepository.findById(pId).orElse(null);
 
-        if(player == null) {
+        if (player == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        return ResponseEntity.ok(new PlayerDTO(player));
+        Pitcher pitcher = pitcherRepository.findByPlayer(player).orElse(null);
+        Hitter hitter = hitterRepository.findByPlayer(player).orElse(null);
+
+        PlayerDTO playerDTO = new PlayerDTO(player);
+        if (pitcher != null) {
+            playerDTO.setPitcherStats(pitcher.getBb(), pitcher.getEra());
+        }
+        if (hitter != null) {
+            playerDTO.setHitterStats(hitter.getAvg(), hitter.getObp(), hitter.getSlg());
+        }
+
+        return ResponseEntity.ok(playerDTO);
     }
+
 }
 

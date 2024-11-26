@@ -24,11 +24,11 @@ export default function Table({ id, title, date, location, homeTeam, awayTeam, h
 
     // 테이블 행 클릭 시 실행되는 함수
     const handleRowClick = (id) => {
-        navigate(`/log/${id}`);
+        navigate(`/log/detail/${id}`);
     };
 
     const handleWriteLog = () => {
-        navigate('/write');
+        navigate('/log/create');
     }
     if (id === 0) {
         return (

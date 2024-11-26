@@ -72,7 +72,7 @@ export default function LogWrite() {
             .then((res) => {
                 if (res.ok) {
                     alert("작성 완료");
-                    navigate('/main');
+                    navigate('/dashboard');
                 } else {
                     throw new Error("Failed to save data");
                 }

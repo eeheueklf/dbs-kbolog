@@ -12,7 +12,7 @@ export default function Log() {
     const { id } = useParams();
     const navigate = useNavigate();
     const handleLogEdit = (id) => {
-        navigate(`/Edit/${id}`);
+        navigate(`/log/edit/${id}`);
     };
 
     const handleLogDelete = () => {
