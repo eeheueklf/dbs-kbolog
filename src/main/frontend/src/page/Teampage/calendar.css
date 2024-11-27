@@ -74,43 +74,12 @@ abbr{
 }
 
 
-.react-calendar__month-view__days__day--neighboringMonth:disabled,
-.react-calendar__decade-view__years__year--neighboringDecade:disabled,
-.react-calendar__century-view__decades__decade--neighboringCentury:disabled {
-    color: #cdcdcd;
-}
-
-.react-calendar__tile:enabled:hover,
-.react-calendar__tile:enabled:focus {
-    background-color: #e6e6e6;
-}
-
-.react-calendar__tile--now {
-    background: rgba(2, 128, 246, 0.16);
-}
-
-
-.react-calendar__tile--hasActive {
-    background: #76baff;
-}
-
-.react-calendar__tile--hasActive:enabled:hover,
-.react-calendar__tile--hasActive:enabled:focus {
-    background: #a9d4ff;
-}
 
 .react-calendar__tile--active {
-    background: #006edc;
+    background: var(--team-color, #f0f0f0);
     color: white;
-
 }
 
-.react-calendar__tile--active:enabled:hover,
-.react-calendar__tile--active:enabled:focus {
-    background: #1087ff;
-}
 
-.react-calendar--selectRange .react-calendar__tile--hover {
-    background-color: #e6e6e6;
-}
+
 

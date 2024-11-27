@@ -7,10 +7,8 @@ import "./calendar.css";
 
 export default function Teampage() {
     const [team, setTeam] = useState([]);
-    const [backgroundColor, setBackgroundColor] = useState("#f0f0f0");
     const [gameData, setGameData] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [gamesForSelectedDate, setGamesForSelectedDate] = useState([]);
 
     const formatDate = (date) => {
         const d = new Date(date);
@@ -19,7 +17,6 @@ export default function Teampage() {
         const day = String(d.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     };
-
 
     useEffect(() => {
         fetch("/api/my")
@@ -31,20 +28,20 @@ export default function Teampage() {
                 console.error("API fetch error:", err); // 에러 처리
             });
 
-        switch (team.rootTeamSponsor) {
-            case "기아":
-                setBackgroundColor("#F73600"); // 기아의 배경색
-                break;
-            case "두산":
-                setBackgroundColor("#131230"); // 두산의 배경색
-                break;
-            case "삼성":
-                setBackgroundColor("#074CA1"); // 삼성의 배경색
-                break;
-            default:
-                setBackgroundColor("#f0f0f0"); // 기본 배경색
-        }
     }, [team.rootTeamSponsor]);
+
+    const teamSponsorColors = {
+        기아: "#F73600",
+        두산: "#131230",
+        롯데: "#041E42",
+        삼성: "#074CA1",
+        한화: "#F73600",
+        KIA: "#EA0029",
+        LG: "#C30452",
+        SSG: "#CE0E2D",
+        NC:"#315288",
+        KT: "#000000",
+    };
 
     useEffect(() => {
         const selectedDate = new Date();
@@ -71,6 +68,8 @@ export default function Teampage() {
                 }
             })
             .catch((err) => console.error("Failed to fetch game data:", err));
+        const teamColor = teamSponsorColors[team.rootTeamSponsor] || "#f0f0f0";
+        document.documentElement.style.setProperty('--team-color', teamColor);
     }, [selectedDate, team.id]);
 
     const gamesByDate = gameData.reduce((acc, game) => {

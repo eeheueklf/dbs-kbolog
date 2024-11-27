@@ -74,7 +74,10 @@ public class WatchingController {
         Member user = memberRepository.findByUsername(username);
 
         if (game != null && user != null) {
-            // Watching 객체 생성 및 설정
+
+            if(watchingRepository.existsByGameAndUser(game, user)){
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("Log already exists for this game and user.");
+            }
             Watching watching = new Watching();
             watching.setGame(game);
             watching.setUser(user);
@@ -99,6 +102,12 @@ public class WatchingController {
             // 수정할 Watching 객체 찾아오기
             Watching existingWatching = watchingRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Log not found"));
+
+            boolean existsDuplicateLog = watchingRepository.existsByGameAndUser(game, user);
+            if (existsDuplicateLog && !existingWatching.getGame().equals(game) && !existingWatching.getUser().equals(user)) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("A log with the same game and user already exists.");
+            }
 
             // 기존 데이터 수정
             existingWatching.setGame(game);

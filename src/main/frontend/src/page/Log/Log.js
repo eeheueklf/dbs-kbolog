@@ -24,7 +24,7 @@ export default function Log() {
             .then((res) => {
                 if (res.ok) {
                     alert("로그가 삭제되었습니다.");
-                    navigate("/main"); // 삭제 후 메인 페이지로 이동
+                    navigate("/dashboard"); // 삭제 후 메인 페이지로 이동
                 } else {
                     alert("삭제 실패: " + res.statusText);
                 }

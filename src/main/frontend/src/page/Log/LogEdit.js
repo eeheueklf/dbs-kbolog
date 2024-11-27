@@ -84,7 +84,7 @@ export default function LogEdit() {
             .then((res) => {
                 if (res.ok) {
                     alert("수정 완료");
-                    navigate('/main');
+                    navigate('/dashboard');
                 } else {
                     throw new Error("Failed to update data");
                 }
