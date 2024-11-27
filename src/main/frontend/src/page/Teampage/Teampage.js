@@ -99,21 +99,26 @@ export default function Teampage() {
 
     return (
         <div className={styles.default}>
-            <div className={styles.cropping}
-                 style={{backgroundColor: backgroundColor}}></div>
+            <div className={styles.cropping}></div>
                 <div className={styles.inner}>
-                    <div className={styles.title}>{team.rootTeamName} </div>
-                    <div className={styles.calendarContainer}>
-                        <Calendar
-                            onChange={setSelectedDate}
-                            value={selectedDate}
-                            tileContent={tileContent}
-                            formatDay={(locale, date) => date.toLocaleString("en", {day: "numeric"})}
-                            calendarType="gregory"
-                            locale="en"
-                            showNavigation={false}
-                        />
-                    </div>
+                    {team.rootTeamName ? (
+                        <>
+                            <div className={styles.title}>{team.rootTeamName} 경기 일정</div>
+                            <div className={styles.calendarContainer}>
+                                <Calendar
+                                    onChange={setSelectedDate}
+                                    value={selectedDate}
+                                    tileContent={tileContent}
+                                    formatDay={(locale, date) => date.toLocaleString("en", { day: "numeric" })}
+                                    calendarType="gregory"
+                                    locale="en"
+                                    showNavigation={false}
+                                />
+                            </div>
+                        </>
+                    ) : (
+                        <p>응원하는 팀이 없습니다</p>
+                    )}
 
 
                 </div>

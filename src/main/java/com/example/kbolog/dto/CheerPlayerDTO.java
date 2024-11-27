@@ -1,6 +1,7 @@
 package com.example.kbolog.dto;
 
 import com.example.kbolog.entity.CheerPlayer;
+import com.example.kbolog.entity.Member;
 import com.example.kbolog.entity.Player;
 
 import java.time.LocalDate;
@@ -28,5 +29,6 @@ public class CheerPlayerDTO {
         this.sponsor = player.getTeam().getSponsor();
         this.cheerDate = cheerPlayer.getCheerDate();
     }
+
 }
 

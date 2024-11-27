@@ -12,7 +12,7 @@ import MypageEdit from "./page/Mypage/MypageEdit"
 import Teampage from "./page/Teampage/Teampage"
 import Playerpage from "./page/Player/Playerpage";
 import PlayerDetail from "./page/Player/PlayerDetail";
-
+import Players from "./page/Players/Players";
 
 function App() {
     return (
@@ -28,7 +28,8 @@ function App() {
                     <Route path="/log/edit/:id" element={<LogEdit/>}/>/>
                     <Route path="/profile" element={<Mypage/>} />
                     <Route path="/profile/edit" element={<MypageEdit/>} />
-                    <Route path="/team/fav" element={<Teampage/>} />
+                    <Route path="/team/fav" element={<Teampage/>} />                    <Route path="/players/fav" element={<Playerpage/>} />
+                    <Route path="/players/" element={<Players/>} />
                     <Route path="/players/fav" element={<Playerpage/>} />
                     <Route path="/players/detail/:pId" element={<PlayerDetail />} />
                 </Routes>

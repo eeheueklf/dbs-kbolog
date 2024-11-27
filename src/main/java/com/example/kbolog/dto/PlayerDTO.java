@@ -23,12 +23,13 @@ public class PlayerDTO {
     private String hander;
     private String battingHand;
 
+    private Double ip;
     private Double era;
-    private Double bb;
+    private Double whip;
 
     private Double avg;
-    private Double obp;
-    private Double slg;
+    private Double ops;
+    private Double war;
 
     public PlayerDTO(Long playerId, String playerName, Integer playerNumber, Integer playerPosition,String teamName, String teamSponsor, LocalDate cheerDate) {
         this.playerId = playerId;
@@ -39,15 +40,16 @@ public class PlayerDTO {
         this.teamSponsor = teamSponsor;
         this.cheerDate = cheerDate;
     }
-    public void setPitcherStats(Double bb, Double era) {
-        this.bb = bb;
+    public void setPitcherStats(Double ip, Double era, Double whip) {
+        this.ip = ip;
         this.era = era;
+        this.whip = whip;
     }
 
-    public void setHitterStats(Double avg, Double obp, Double slg) {
+    public void setHitterStats(Double avg, Double ops, Double war) {
         this.avg = avg;
-        this.obp = obp;
-        this.slg = slg;
+        this.ops = ops;
+        this.war = war;
     }
 
     public PlayerDTO(Player player) {
@@ -55,6 +57,8 @@ public class PlayerDTO {
         this.playerName = player.getPlayerName();
         this.playerNumber = player.getPlayerNumber();
         this.playerPosition = player.getPlayerPosition();
+        this.teamName = player.getTeam().getTeamName();
+        this.teamSponsor = player.getTeam().getSponsor();
     }
 }
 

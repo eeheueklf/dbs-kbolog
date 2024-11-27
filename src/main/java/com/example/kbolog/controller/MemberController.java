@@ -51,6 +51,34 @@ public class MemberController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/api/signout")
+    public ResponseEntity<Map<String, String>> signout(HttpSession session) {
+        session.invalidate();;
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Logout successful");
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/api/resign")
+    public ResponseEntity<Map<String, String>> deleteAccount(HttpSession session) {
+        String username = (String) session.getAttribute("username");
+
+        if (username == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "로그인 상태가 아닙니다."));
+        }
+
+        Member member = memberRepository.findByUsername(username);
+        if (member == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "사용자를 찾을 수 없습니다."));
+        }
+
+        memberRepository.delete(member);
+
+        session.invalidate();
+
+        return ResponseEntity.ok(Map.of("message", "회원 탈퇴가 완료되었습니다."));
+    }
+
     @GetMapping("/api/my")
     public ResponseEntity<MemberDTO> getMyMember(HttpSession session) {
         String username = (String) session.getAttribute("username");

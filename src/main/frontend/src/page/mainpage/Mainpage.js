@@ -26,7 +26,7 @@ export default function Mainpage() {
             </div>
             <div className={styles.inner}>
                 <div className={styles.title}>2024 KBO</div>
-                <br/>다가오는 경기 - 추후 기능 추가<br/><br/>
+                <br/>
                 <Table id={0}/>
                 {record.map(data => (
                     <Table

@@ -67,7 +67,6 @@ export default function LogEdit() {
     // 폼 제출 핸들러
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("formData:", formData);
 
         // 수정된 데이터를 서버로 전송
         fetch(`/api/log/edit/${id}`, {  // 수정 API 엔드포인트

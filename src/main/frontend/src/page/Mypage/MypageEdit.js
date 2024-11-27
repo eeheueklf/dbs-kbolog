@@ -53,7 +53,6 @@ export default function Mypage() {
             </div>
             <div className={styles.inner}>
                 <div>
-                    <FontAwesomeIcon className={styles.ii} icon={faMarker}/>
                     <p className={styles.emoji}>💟</p>
                     <p className={styles.title}>마이페이지</p>
                     <form onSubmit={handleSubmit}>

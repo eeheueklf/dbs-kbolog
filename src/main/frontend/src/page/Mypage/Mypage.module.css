@@ -99,3 +99,13 @@ label {
 .ii:hover{
   color:black;
 }
+
+.caption{
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-family: 'Pretendard-light';
+  color: #575757;
+  cursor: pointer;
+  margin-left : 115px;
+}
+

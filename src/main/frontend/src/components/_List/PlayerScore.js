@@ -11,15 +11,15 @@ export default function PlayerScore({ position ,scoreData }) {
                 <ul>
                     <li>
                         <span>ERA</span>
-                        <strong>{scoreData.innings}</strong>
+                        <strong>{scoreData.era}</strong>
                     </li>
                     <li>
                         <span>승</span>
-                        <strong>1313</strong>
+                        <strong>{scoreData.ip}</strong>
                     </li>
                     <li>
                         <span>패</span>
-                        <strong>1313</strong>
+                        <strong>{scoreData.whip}</strong>
                     </li>
                     <li>
                         <span>세이브</span>
@@ -35,15 +35,15 @@ export default function PlayerScore({ position ,scoreData }) {
             <ul>
                 <li>
                     <span>d</span>
-                    <strong>{scoreData.obp}</strong>
-                </li>
-                <li>
-                    <span>득점</span>
                     <strong>{scoreData.avg}</strong>
                 </li>
                 <li>
+                    <span>득점</span>
+                    <strong>{scoreData.ops}</strong>
+                </li>
+                <li>
                     <span>안타</span>
-                    <strong>{scoreData.slg}</strong>
+                    <strong>{scoreData.war}</strong>
                 </li>
                 <li>
                     <span>홈런</span>

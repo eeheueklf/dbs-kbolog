@@ -19,9 +19,9 @@ public class Hitter {
     public Double avg; // 타율
 
     @Column(nullable = false)
-    public Double obp; // 출루율
+    public Double ops; // 출루율 + 장타율
 
     @Column(nullable = false)
-    public Double slg; // 장타율
+    public Double war; // 대체 선수 대비 승리 기여도
 }
 

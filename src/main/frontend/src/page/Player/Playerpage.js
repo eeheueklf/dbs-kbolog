@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import Footer from "../../components/_Layout/Footer";
 import HeaderImg from "../../image/playerHeader.jpg";
 import PlayerTable from "../../components/_Table/PlayerTable";
+import Calendar from "react-calendar";
 
 export default function Playerpage() {
     const [player, setPlayer] = useState([]);
@@ -28,6 +29,7 @@ export default function Playerpage() {
                 <div className={styles.title}>관심 선수</div>
                 <br/>
                 <PlayerTable pId={0}/>
+
                 {player.map(data => {
                     // cheerDate를 Date 객체로 변환
                     const cheerDate = new Date(data.cheerDate);
