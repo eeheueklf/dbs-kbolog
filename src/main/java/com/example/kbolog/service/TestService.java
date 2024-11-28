@@ -21,9 +21,9 @@ public class TestService {
         return stadiumRepository.findAll();
     }
 
-    private WatchingRepository watchingRepository;
+//    private WatchingRepository watchingRepository;
 
-    public List<Watching> getWatchingList() { return watchingRepository.findAll(); }
+//    public List<Watching> getWatchingList() { return watchingRepository.findAll(); }
 
     private TeamRepository teamRepository;
 
