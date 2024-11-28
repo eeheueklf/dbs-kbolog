@@ -44,14 +44,15 @@ public class PlayerController {
 
     @GetMapping(value = "/api/player/{pId}")
     public ResponseEntity<PlayerDTO> getPlayerDetails(@PathVariable Long pId) {
+        // 😿
         Player player = playerRepository.findById(pId).orElse(null);
 
         if (player == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        Pitcher pitcher = pitcherRepository.findByPlayer(player).orElse(null);
-        Hitter hitter = hitterRepository.findByPlayer(player).orElse(null);
+        Pitcher pitcher = pitcherRepository.findByPlayer(player.getPlayerId()).orElse(null);
+        Hitter hitter = hitterRepository.findByPlayer(player.getPlayerId()).orElse(null);
 
         PlayerDTO playerDTO = new PlayerDTO(player);
         if (pitcher != null) {
@@ -66,18 +67,19 @@ public class PlayerController {
 
     @GetMapping("/api/player")
     public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
+        // 😿
         List<Player> players = playerRepository.findAll();
         List<PlayerDTO> playerDTOs = players.stream().map(player -> {
             PlayerDTO playerDTO = new PlayerDTO(player);
 
             // 투수 데이터 확인
-            Pitcher pitcher = pitcherRepository.findByPlayer(player).orElse(null);
+            Pitcher pitcher = pitcherRepository.findByPlayer(player.getPlayerId()).orElse(null);
             if (pitcher != null) {
                 playerDTO.setPitcherStats(pitcher.getIp(), pitcher.getEra(), pitcher.getWhip());
             }
 
             // 타자 데이터 확인
-            Hitter hitter = hitterRepository.findByPlayer(player).orElse(null);
+            Hitter hitter = hitterRepository.findByPlayer(player.getPlayerId()).orElse(null);
             if (hitter != null) {
                 playerDTO.setHitterStats(hitter.getAvg(), hitter.getOps(), hitter.getWar());
             }
@@ -91,11 +93,16 @@ public class PlayerController {
     @GetMapping("/api/player/isFav/{pId}")
     public ResponseEntity<Boolean> isFavPlayer(@PathVariable Long pId, HttpSession session) {
         String username = (String) session.getAttribute("username");
+
+        // 😿
         Player player = playerRepository.findById(pId).orElse(null);
         Member member = memberRepository.findByUsername(username);
-        boolean isFavorite = cheerPlayerRepository.existsByMemberAndPlayer(member,player);
-        return ResponseEntity.ok(isFavorite);
+
+        Integer isFavorite = cheerPlayerRepository.existsByMemberAndPlayer(member.getId(), player.getPlayerId());
+
+        return ResponseEntity.ok(isFavorite == 1);
     }
+
 
     @PostMapping("/api/player/select/{pId}")
     public void addFavorite(@PathVariable Long pId, HttpSession session) {
@@ -103,6 +110,7 @@ public class PlayerController {
         String username = (String) session.getAttribute("username");
 
         Member member = memberRepository.findByUsername(username);
+        // 😿
         Player player = playerRepository.findById(pId).orElse(null);
 
         if(member != null && player != null) {
@@ -110,26 +118,26 @@ public class PlayerController {
             cheerPlayer.setPlayer(player);
             cheerPlayer.setMember(member);
             cheerPlayer.setCheerDate(LocalDate.now());
+            // 😿
             cheerPlayerRepository.save(cheerPlayer);
         }
     }
 
     @DeleteMapping("/api/player/select/{pId}")
     public void removeFavorite(@PathVariable Long pId, HttpSession session) {
-
-        // 세션에서 사용자 정보 가져오기
         String username = (String) session.getAttribute("username");
 
-        // 사용자가 존재하는지 확인
         Member member = memberRepository.findByUsername(username);
+        // 😿
         Player player = playerRepository.findById(pId).orElse(null);
 
         if (member != null && player != null) {
-            // CheerPlayer가 존재하는지 확인하여 삭제
-            CheerPlayer cheerPlayer = cheerPlayerRepository.findByMemberAndPlayer(member, player);
+            // CheerPlayer 존재 여부 확인 후 삭제
+            CheerPlayer cheerPlayer = cheerPlayerRepository.findByMemberAndPlayer(member.getId(), player.getPlayerId());
 
             if (cheerPlayer != null) {
-                cheerPlayerRepository.delete(cheerPlayer);  // 관심 선수 해제
+                // 😿
+                cheerPlayerRepository.delete(cheerPlayer);
             }
         }
     }

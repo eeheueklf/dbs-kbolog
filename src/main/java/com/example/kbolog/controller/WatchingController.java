@@ -70,6 +70,7 @@ public class WatchingController {
     public ResponseEntity<String> logWrite(@RequestBody WatchingRequest request, HttpSession session) {
         String username = (String) session.getAttribute("username");
 
+        // 😿
         Game game = gameRepository.findById(request.getGameId()).orElse(null);
         Member user = memberRepository.findByUsername(username);
 
@@ -89,6 +90,7 @@ public class WatchingController {
     public ResponseEntity<String> logEdit(@PathVariable Long id, @RequestBody WatchingRequest request, HttpSession session) {
         String username = (String) session.getAttribute("username");
 
+        // 😿
         Game game = gameRepository.findById(request.getGameId()).orElse(null);
         Member user = memberRepository.findByUsername(username);
 

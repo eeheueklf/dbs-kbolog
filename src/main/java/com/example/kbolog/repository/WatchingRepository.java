@@ -53,6 +53,4 @@ public interface WatchingRepository extends JpaRepository<Watching, Long> {
     @Modifying
     @Query(value = "DELETE FROM watching WHERE watching_id = :id", nativeQuery = true)
     void delete(@Param("id") Long id);
-
-
 }

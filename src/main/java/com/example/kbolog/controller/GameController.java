@@ -6,8 +6,6 @@ import com.example.kbolog.entity.Game;
 import com.example.kbolog.repository.GameRepository;
 import com.example.kbolog.repository.TeamRepository;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -23,11 +21,10 @@ public class GameController {
     private final TeamRepository teamRepository;
 
     @GetMapping("/api/game")
-    public List<GameDTO> getGamesByDate(@RequestParam("date")LocalDate date){
-        List<Game> games = gameRepository.findByGameDate(date);
+    public List<GameDTO> getGamesByDate(@RequestParam("date")LocalDate gameDate){
+        List<Game> games = gameRepository.findByGameDate(gameDate);
         return games.stream().map(GameDTO::new).collect(Collectors.toList());
     }
-    private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
     @PostMapping("/api/game/team")
     public List<GameDTO> getGamesByTeamAndMonth(@RequestBody GameRequest request) {

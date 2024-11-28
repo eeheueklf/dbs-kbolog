@@ -1,8 +1,7 @@
 package com.example.kbolog.controller;
 
 import com.example.kbolog.dto.TeamDTO;
-import com.example.kbolog.entity.Team;
-import com.example.kbolog.service.TestService;
+import com.example.kbolog.repository.TeamRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +13,14 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class TeamController {
 
-    private final TestService testService;
+    private final TeamRepository teamRepository;
 
-    @GetMapping(value="/api/my/team")
-    public List<TeamDTO> getTeamList(){
-        // Fetch list of teams from service and map them to TeamDTO
-        return testService.getTeamList().stream()
-                .map(TeamDTO::fromEntity) // Convert Team entity to TeamDTO
+    @GetMapping(value = "/api/my/team")
+    public List<TeamDTO> getTeamList() {
+        return teamRepository.findAllTeams().stream()
+                .map(team -> new TeamDTO(
+                        team.getTeamName(),
+                        team.getSponsor()))
                 .collect(Collectors.toList());
     }
 
