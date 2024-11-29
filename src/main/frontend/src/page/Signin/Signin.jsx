@@ -49,25 +49,32 @@ export default function Signin() {
 
     return (
         <div className={styles.signupPage}>
-            <div>
+            <div className={styles.signupContainer}>
                 <div className={styles.title}>크보로그</div>
-                <div className={styles.inputArea}>
-                    <input className={styles.inputId}
-                           value={username}
-                           onChange={(e)=>{setUsername(e.target.value)}}
-                           type="text"
-                           placeholder="ID를 입력해주세요." />
+                <div className={styles.inputGroup}>
+                    <input
+                        className={styles.inputField}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        type="text"
+                        placeholder="ID"
+                    />
                 </div>
-                <div className={styles.inputArea}>
-
-                    <input value={password}
-                           onChange={(e)=>{setPassword(e.target.value)}} type="password"
-                           placeholder="비밀번호를 입력해주세요." />
+                <div className={styles.inputGroup}>
+                    <input
+                        className={styles.inputField}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        type="password"
+                        placeholder="비밀번호"
+                    />
                 </div>
-                <button onClick={handleSignIn} className={styles.signin}>로그인</button>
-
+                <button onClick={handleSignIn} className={styles.signinButton}>
+                    로그인
+                </button>
             </div>
         </div>
     );
+
 
 };

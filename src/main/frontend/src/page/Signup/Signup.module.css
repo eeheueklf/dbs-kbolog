@@ -12,61 +12,82 @@
   font-style: normal;
 }
 
-  
 .signupPage {
-  background-color: #ffffff;
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  align-items: center; /* Center content vertically */
+  align-items: center;
   height: 100vh;
-  position: relative;
   width: 100vw;
+  font-family: 'S-CoreDream-3Light', sans-serif;
 }
 
-.signupPage .title {
-  color: #000000;
-  font-size: 60px;
-  font-weight: 400;
-  left: 0;
-  letter-spacing: 0;
-  line-height: normal;
-  padding-bottom: 20px;
+.signupContainer {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 400px;
+  text-align: center;
+}
+
+.title {
   font-family: 'KBO-Dia-Gothic_bold', sans-serif;
+  font-size: 36px;
+  color: #333333;
+  margin-bottom: 30px;
 }
 
-.signin{
-  font-family : "S-CoreDream-3Light", sans-serif;
-  font-weight: 600;
-  color: #585858;
-  font-size: 22px;
-  margin: 10px;
-  cursor: pointer;
+.inputGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.inputField {
+  font-family: 'S-CoreDream-3Light';
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 15px;
+  width: calc(100% - 120px);
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.inputField:focus {
+  border-color: #4c4c4c;
+  outline: none;
+}
+
+.duplicateCheckButton {
+  font-family: 'S-CoreDream-3Light';
+  background-color: #3165ff;
+  color: #ffffff;
   border: none;
-  background-color: inherit;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
-.inputArea{
-  width:100%;
+.duplicateCheckButton:hover {
+  background-color: #5d85f8;
 }
 
-.inputArea input{
-  border:none;
-  border-bottom: 1px solid black;
-  width:94%;
-  padding : 10px;  
+.signupButton {
+  font-family: 'S-CoreDream-3Light';
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
 }
 
-.inputArea input:focus, .inputArea button:focus{
-  outline:none;
+.signupButton:hover {
+  background-color: #4c4c4c;
 }
 
-.inputArea button{
-  width:18%;
-  padding: 10px;
-}
-
-.inputArea .inputId{
-  width:70%;
-
-}

@@ -16,6 +16,12 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "SELECT * FROM member u WHERE u.username = :username", nativeQuery = true)
     Member findByUsername(@Param("username") String username);
 
+//    중복 username 체크
+    @Query(value = "SELECT EXISTS (SELECT 1 FROM member WHERE username = :username)",
+            nativeQuery = true)
+    Integer existsByUsername(@Param("username") String username);
+
+
     // 회원가입
     @Transactional
     @Modifying
