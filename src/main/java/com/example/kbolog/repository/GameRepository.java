@@ -1,6 +1,7 @@
 package com.example.kbolog.repository;
 
 import com.example.kbolog.entity.Game;
+import com.example.kbolog.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,5 +24,11 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 // 날짜 선택 시 경기 일정 리스트
     @Query(value = "SELECT * FROM game WHERE game_date = :gameDate", nativeQuery = true)
     List<Game> findByGameDate(@Param("gameDate") LocalDate gameDate);
+
+
+//    아이디로 게임 찾기
+    @Query(value = "SELECT * FROM game g WHERE g.game_id = :gameId", nativeQuery = true)
+    Game findByGameId(@Param("gameId") Long gameId);
+
 
 }

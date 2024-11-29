@@ -1,25 +1,20 @@
 package com.example.kbolog.controller;
 
-import com.example.kbolog.Request.WatchingRequest;
 import com.example.kbolog.dto.PlayerDTO;
-import com.example.kbolog.dto.WatchingDTO;
 import com.example.kbolog.entity.*;
 import com.example.kbolog.repository.*;
-import com.example.kbolog.service.PlayerService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
 public class PlayerController {
-    private final PlayerService playerService;
     private final MemberRepository memberRepository;
     private final PlayerRepository playerRepository;
     private final PitcherRepository pitcherRepository;
@@ -38,14 +33,28 @@ public class PlayerController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        List<PlayerDTO> playerDTOs = playerService.getCheeredPlayersByMember(member);
+        List<PlayerDTO> playerDTOs = member.getCheerPlayers().stream()
+                .map(cheerPlayer -> {
+                    Player player = cheerPlayer.getPlayer();
+                    return new PlayerDTO(
+                            player.getPlayerId(),
+                            player.getPlayerName(),
+                            player.getPlayerNumber(),
+                            player.getPlayerPosition(),
+                            player.getTeam().getTeamName(),
+                            player.getTeam().getSponsor(),
+                            cheerPlayer.getCheerDate()
+                    );
+                })
+                .collect(Collectors.toList());
+
         return ResponseEntity.ok(playerDTOs);
     }
 
+
     @GetMapping(value = "/api/player/{pId}")
     public ResponseEntity<PlayerDTO> getPlayerDetails(@PathVariable Long pId) {
-        // 😿
-        Player player = playerRepository.findById(pId).orElse(null);
+        Player player = playerRepository.findByPlayerId(pId);
 
         if (player == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -67,8 +76,7 @@ public class PlayerController {
 
     @GetMapping("/api/player")
     public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
-        // 😿
-        List<Player> players = playerRepository.findAll();
+        List<Player> players = playerRepository.findAllPlayers();
         List<PlayerDTO> playerDTOs = players.stream().map(player -> {
             PlayerDTO playerDTO = new PlayerDTO(player);
 
@@ -94,8 +102,7 @@ public class PlayerController {
     public ResponseEntity<Boolean> isFavPlayer(@PathVariable Long pId, HttpSession session) {
         String username = (String) session.getAttribute("username");
 
-        // 😿
-        Player player = playerRepository.findById(pId).orElse(null);
+        Player player = playerRepository.findByPlayerId(pId);
         Member member = memberRepository.findByUsername(username);
 
         Integer isFavorite = cheerPlayerRepository.existsByMemberAndPlayer(member.getId(), player.getPlayerId());
@@ -110,16 +117,10 @@ public class PlayerController {
         String username = (String) session.getAttribute("username");
 
         Member member = memberRepository.findByUsername(username);
-        // 😿
-        Player player = playerRepository.findById(pId).orElse(null);
+        Player player = playerRepository.findByPlayerId(pId);
 
         if(member != null && player != null) {
-            CheerPlayer cheerPlayer = new CheerPlayer();
-            cheerPlayer.setPlayer(player);
-            cheerPlayer.setMember(member);
-            cheerPlayer.setCheerDate(LocalDate.now());
-            // 😿
-            cheerPlayerRepository.save(cheerPlayer);
+            cheerPlayerRepository.addFav(player.getPlayerId(), member.getId());
         }
     }
 
@@ -128,16 +129,14 @@ public class PlayerController {
         String username = (String) session.getAttribute("username");
 
         Member member = memberRepository.findByUsername(username);
-        // 😿
-        Player player = playerRepository.findById(pId).orElse(null);
+        Player player = playerRepository.findByPlayerId(pId);
 
         if (member != null && player != null) {
             // CheerPlayer 존재 여부 확인 후 삭제
             CheerPlayer cheerPlayer = cheerPlayerRepository.findByMemberAndPlayer(member.getId(), player.getPlayerId());
 
             if (cheerPlayer != null) {
-                // 😿
-                cheerPlayerRepository.delete(cheerPlayer);
+                cheerPlayerRepository.delFav(cheerPlayer.getId());
             }
         }
     }

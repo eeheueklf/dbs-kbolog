@@ -13,24 +13,24 @@ public class Watching {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
-    public Long watchingId;
+    private Long watchingId;
 
     @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)
-    public Game game;
+    private Game game;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    public Member user;
+    private Member user;
 
     @Column(nullable = false, length = 255)
-    public String title;
+    private String title;
 
     @Column(nullable = false, length = 500)
-    public String content;
+    private String content;
 
     @Column(nullable = false)
-    public String location;
+    private String location;
 
 }
 

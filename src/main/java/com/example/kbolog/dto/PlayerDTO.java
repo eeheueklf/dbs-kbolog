@@ -1,9 +1,6 @@
 package com.example.kbolog.dto;
 
-import com.example.kbolog.entity.Hitter;
-import com.example.kbolog.entity.Pitcher;
 import com.example.kbolog.entity.Player;
-import com.example.kbolog.entity.Watching;
 import lombok.Getter;
 import lombok.Setter;
 

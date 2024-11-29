@@ -13,18 +13,18 @@ public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long gameId;
+    private Long gameId;
 
     @Column(nullable = false)
-    public LocalDate gameDate;
+    private LocalDate gameDate;
 
     @ManyToOne
     @JoinColumn(name = "home_team", nullable = false)  // 홈팀 외래키
-    public Team homeTeam;
+    private Team homeTeam;
 
     @ManyToOne
     @JoinColumn(name = "away_team", nullable = false)  // 원정팀 외래키
-    public Team awayTeam;
+    private Team awayTeam;
 
 
 }

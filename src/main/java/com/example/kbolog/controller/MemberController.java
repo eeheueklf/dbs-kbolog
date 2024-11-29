@@ -24,8 +24,7 @@ public class MemberController {
 
     @PostMapping("/api/signup")
     public void signup(@RequestBody Member member) {
-        // 😿
-        memberRepository.save(member);
+        memberRepository.signup(member.getUsername(), member.getPassword());
     }
 
     @PostMapping("/api/signin")
@@ -73,8 +72,7 @@ public class MemberController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "사용자를 찾을 수 없습니다."));
         }
 
-        // 😿
-        memberRepository.delete(member);
+        memberRepository.resign(member.getId());
 
         session.invalidate();
 
@@ -114,8 +112,7 @@ public class MemberController {
         }
         member.setRootTeam(team);
         member.setRootdate(LocalDate.now());
-        // 😿
-        memberRepository.save(member);
+        memberRepository.edit(member.getId(),team.getTeamId());
         return ResponseEntity.ok("Good");  // 정상적으로 OK 응답
     }
 

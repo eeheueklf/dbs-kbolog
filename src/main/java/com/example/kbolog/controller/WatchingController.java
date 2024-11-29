@@ -10,8 +10,6 @@ import com.example.kbolog.repository.MemberRepository;
 import com.example.kbolog.repository.WatchingRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -70,8 +68,7 @@ public class WatchingController {
     public ResponseEntity<String> logWrite(@RequestBody WatchingRequest request, HttpSession session) {
         String username = (String) session.getAttribute("username");
 
-        // 😿
-        Game game = gameRepository.findById(request.getGameId()).orElse(null);
+        Game game = gameRepository.findByGameId(request.getGameId());
         Member user = memberRepository.findByUsername(username);
 
         if (game != null && user != null) {
@@ -90,8 +87,7 @@ public class WatchingController {
     public ResponseEntity<String> logEdit(@PathVariable Long id, @RequestBody WatchingRequest request, HttpSession session) {
         String username = (String) session.getAttribute("username");
 
-        // 😿
-        Game game = gameRepository.findById(request.getGameId()).orElse(null);
+        Game game = gameRepository.findByGameId(request.getGameId());
         Member user = memberRepository.findByUsername(username);
 
         if (game != null && user != null) {

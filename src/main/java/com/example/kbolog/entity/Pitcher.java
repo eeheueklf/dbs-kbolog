@@ -14,15 +14,15 @@ public class Pitcher {
     @MapsId
     @OneToOne
     @JoinColumn(name = "player_id")
-    public Player player;
+    private Player player;
 
     @Column(nullable = false)
-    public Double ip; // 이닝
+    private Double ip; // 이닝
 
     @Column(nullable = false)
-    public Double era; // 평균자책점
+    private Double era; // 평균자책점
 
     @Column(nullable = false)
-    public Double whip; // 이닝당 출루 허용률
+    private Double whip; // 이닝당 출루 허용률
 
 }

@@ -15,20 +15,20 @@ public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
-    public Long id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
-    public String username;
+    private String username;
 
     @Column(nullable = false)
-    public  String password;
+    private  String password;
 
     @ManyToOne
     @JoinColumn(name = "team_id")
-    public Team rootTeam;
+    private Team rootTeam;
 
     @Column
-    public LocalDate rootdate;
+    private LocalDate rootdate;
 
     @OneToMany(mappedBy = "member")
     @JsonManagedReference

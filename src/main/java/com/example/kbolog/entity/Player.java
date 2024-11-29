@@ -15,26 +15,26 @@ public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long playerId;
+    private Long playerId;
 
     @Column(nullable = false, length = 20)
-    public String playerName;
+    private String playerName;
 
     @Column(nullable = false)
-    public Integer playerNumber;
+    private Integer playerNumber;
 
     @Column(nullable = false)
-    public Integer playerPosition;
+    private Integer playerPosition;
 
     @Column(nullable = false)
-    public String hander;  // '좌투', '우투', '스위치'
+    private String hander;  // '좌투', '우투', '스위치'
 
     @Column(nullable = false)
-    public String battingHand;  // '좌타', '우타', '스위치'
+    private String battingHand;  // '좌타', '우타', '스위치'
 
     @ManyToOne
-    @JoinColumn(name = "team_id")
-    public Team team;
+    @JoinColumn(name = "team_id", nullable = false)
+    private Team team;
 
     @OneToMany(mappedBy = "player")
     private Set<CheerPlayer> cheeredMember;

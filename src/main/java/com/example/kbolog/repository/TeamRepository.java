@@ -15,7 +15,6 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
     @Query(value = "SELECT * FROM team", nativeQuery = true)
     List<Team> findAllTeams();
 
-    @Query(value = "SELECT t FROM Team t WHERE t.sponsor = :sponsor", nativeQuery = true)
+    @Query(value = "SELECT * FROM Team t WHERE t.sponsor = :sponsor", nativeQuery = true)
     Team findBySponsor(@Param("sponsor") String sponsor);
-//    Team findBySponsor(String sponsor);
 }
