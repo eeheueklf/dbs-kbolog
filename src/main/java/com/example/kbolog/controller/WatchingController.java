@@ -54,7 +54,7 @@ public class WatchingController {
     }
 
     @GetMapping(value="/api/log/{id}")
-    public ResponseEntity<WatchingDTO> getWatchingContent(@PathVariable Long id){
+    public ResponseEntity<WatchingDTO> getWatchingContent(@PathVariable Integer id){
         Watching watching = watchingRepository.findByWatchingId(id).orElse(null);
 
         if(watching == null) {
@@ -84,7 +84,7 @@ public class WatchingController {
 
 
     @PutMapping("/api/log/edit/{id}")
-    public ResponseEntity<String> logEdit(@PathVariable Long id, @RequestBody WatchingRequest request, HttpSession session) {
+    public ResponseEntity<String> logEdit(@PathVariable Integer id, @RequestBody WatchingRequest request, HttpSession session) {
         String username = (String) session.getAttribute("username");
 
         Game game = gameRepository.findByGameId(request.getGameId());
@@ -102,7 +102,7 @@ public class WatchingController {
     }
 
     @DeleteMapping("/api/log/delete/{id}")
-    public ResponseEntity<String> logDelete(@PathVariable Long id, HttpSession session) {
+    public ResponseEntity<String> logDelete(@PathVariable Integer id, HttpSession session) {
 
         String username = (String) session.getAttribute("username");
         Member user = memberRepository.findByUsername(username);

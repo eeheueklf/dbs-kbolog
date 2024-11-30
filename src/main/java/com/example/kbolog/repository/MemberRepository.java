@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Integer> {
 
 //    username으로 member찾기
     @Query(value = "SELECT * FROM member u WHERE u.username = :username", nativeQuery = true)
@@ -33,14 +33,14 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Transactional
     @Modifying
     @Query(value = "UPDATE member SET team_id = :teamId, rootdate = CURRENT_DATE WHERE id = :id", nativeQuery = true)
-    void edit(@Param("id") Long id,
-              @Param("teamId") Long teamId
+    void edit(@Param("id") Integer id,
+              @Param("teamId") Integer teamId
     );
 
     // 탈퇴
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM member WHERE id = :id", nativeQuery = true)
-    void resign(@Param("id") Long id);
+    void resign(@Param("id") Integer id);
 
 }

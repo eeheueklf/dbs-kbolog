@@ -11,28 +11,28 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface CheerPlayerRepository extends JpaRepository<CheerPlayer, Long> {
+public interface CheerPlayerRepository extends JpaRepository<CheerPlayer, Integer> {
 
 //    선수 멤버 관심 연결 존재 확인
     @Query(value = "SELECT EXISTS (SELECT 1 FROM cheer_player cp WHERE cp.member_id = :memberId AND cp.player_id = :playerId)", nativeQuery = true)
-    Integer existsByMemberAndPlayer(@Param("memberId") Long memberId, @Param("playerId") Long playerId);
+    Integer existsByMemberAndPlayer(@Param("memberId") Integer memberId, @Param("playerId") Integer playerId);
 
 //    player - 관심 선수 리스트
     @Query(value = "SELECT * FROM cheer_player cp WHERE cp.member_id = :memberId AND cp.player_id = :playerId", nativeQuery = true)
-    CheerPlayer findByMemberAndPlayer(@Param("memberId") Long memberId, @Param("playerId") Long playerId);
+    CheerPlayer findByMemberAndPlayer(@Param("memberId") Integer memberId, @Param("playerId") Integer playerId);
 
 //    //    player - 관심 선수 등록
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO cheer_player (player_id, member_id, cheer_date) VALUES (:playerId, :memberId, CURRENT_DATE)", nativeQuery = true)
-    void addFav(@Param("playerId") Long playerId,
-            @Param("memberId") Long memberId
+    void addFav(@Param("playerId") Integer playerId,
+            @Param("memberId") Integer memberId
             );
 
     // player - 관심 선수 해제
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM cheer_player WHERE id = :id", nativeQuery = true)
-    void delFav(@Param("id") Long id);
+    void delFav(@Param("id") Integer id);
 
 }

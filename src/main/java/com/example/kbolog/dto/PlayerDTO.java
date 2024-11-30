@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class PlayerDTO {
-    private Long playerId;
+    private Integer playerId;
     private String playerName;
     private Integer playerNumber;
     private Integer playerPosition;
@@ -28,7 +28,7 @@ public class PlayerDTO {
     private Double ops;
     private Double war;
 
-    public PlayerDTO(Long playerId, String playerName, Integer playerNumber, Integer playerPosition,String teamName, String teamSponsor, LocalDate cheerDate) {
+    public PlayerDTO(Integer playerId, String playerName, Integer playerNumber, Integer playerPosition,String teamName, String teamSponsor, LocalDate cheerDate) {
         this.playerId = playerId;
         this.playerName = playerName;
         this.playerNumber = playerNumber;

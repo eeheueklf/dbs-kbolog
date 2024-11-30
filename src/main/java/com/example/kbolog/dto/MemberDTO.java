@@ -10,10 +10,10 @@ import java.time.LocalDate;
 @Setter
 public class MemberDTO {
 
-    private Long id;
+    private Integer id;
     private String username;
     private LocalDate rootDate;
-    private Long rootTeamId;
+    private Integer rootTeamId;
     private String rootTeamName;
     private String rootTeamSponsor;
 

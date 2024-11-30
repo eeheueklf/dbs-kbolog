@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Setter
 public class GameDTO {
 
-    private Long gameId;
+    private Integer gameId;
     private LocalDate gameDate;
     private String homeTeamName;
     private String awayTeamName;

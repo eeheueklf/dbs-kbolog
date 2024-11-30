@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 public class WatchingDTO {
 
-    private Long watchingId;
+    private Integer watchingId;
     private String homeTeam;
     private String awayTeam;
     private String homeTeamSponsor;

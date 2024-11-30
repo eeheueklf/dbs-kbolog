@@ -9,12 +9,13 @@ import java.time.LocalDate;
 @Setter
 public class GameRequest {
 
-    private Long teamId;
+    private Integer teamId;
     private LocalDate start;
     private LocalDate end;
 
-    public GameRequest(Long teamId, LocalDate start, LocalDate end) {
-        this.teamId = teamId;
+    public GameRequest(Integer teamId, LocalDate start, LocalDate end) {
+        this.teamId = teamId
+        ;
         this.start = start;
         this.end = end;
     }

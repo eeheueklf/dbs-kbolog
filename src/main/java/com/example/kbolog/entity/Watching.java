@@ -13,7 +13,7 @@ public class Watching {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
-    private Long watchingId;
+    private Integer watchingId;
 
     @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)

@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 import javax.swing.text.html.Option;
 import java.util.Optional;
 
-public interface PitcherRepository extends JpaRepository<Pitcher, Long> {
+public interface PitcherRepository extends JpaRepository<Pitcher, Integer> {
 
 //    players - 투수 목록
 @Query(value = "SELECT * FROM pitcher p WHERE p.player_id = :playerId", nativeQuery = true)
-Optional<Pitcher> findByPlayer(@Param("playerId") Long playerId);
+Optional<Pitcher> findByPlayer(@Param("playerId") Integer playerId);
 }

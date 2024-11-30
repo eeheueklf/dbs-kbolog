@@ -11,7 +11,7 @@ import java.time.Year;
 @AllArgsConstructor
 public class TeamDTO {
 
-    private Long teamId;
+    private Integer teamId;
     private String teamName;
     private String sponsor;
     private Year foundedYear;

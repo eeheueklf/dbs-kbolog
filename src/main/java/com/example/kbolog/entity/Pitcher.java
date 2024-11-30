@@ -9,7 +9,7 @@ import lombok.Getter;
 public class Pitcher {
 
     @Id
-    private Long playerId;
+    private Integer playerId;
 
     @MapsId
     @OneToOne

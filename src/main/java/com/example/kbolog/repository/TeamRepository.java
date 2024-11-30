@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TeamRepository extends JpaRepository<Team, Long> {
+public interface TeamRepository extends JpaRepository<Team, Integer> {
 
 //    setting - 모든 팀 리스트
     @Query(value = "SELECT * FROM team", nativeQuery = true)

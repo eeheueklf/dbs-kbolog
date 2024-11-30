@@ -53,7 +53,7 @@ public class PlayerController {
 
 
     @GetMapping(value = "/api/player/{pId}")
-    public ResponseEntity<PlayerDTO> getPlayerDetails(@PathVariable Long pId) {
+    public ResponseEntity<PlayerDTO> getPlayerDetails(@PathVariable Integer pId) {
         Player player = playerRepository.findByPlayerId(pId);
 
         if (player == null) {
@@ -99,7 +99,7 @@ public class PlayerController {
     }
 
     @GetMapping("/api/player/isFav/{pId}")
-    public ResponseEntity<Boolean> isFavPlayer(@PathVariable Long pId, HttpSession session) {
+    public ResponseEntity<Boolean> isFavPlayer(@PathVariable Integer pId, HttpSession session) {
         String username = (String) session.getAttribute("username");
 
         Player player = playerRepository.findByPlayerId(pId);
@@ -112,7 +112,7 @@ public class PlayerController {
 
 
     @PostMapping("/api/player/select/{pId}")
-    public void addFavorite(@PathVariable Long pId, HttpSession session) {
+    public void addFavorite(@PathVariable Integer pId, HttpSession session) {
 
         String username = (String) session.getAttribute("username");
 
@@ -125,7 +125,7 @@ public class PlayerController {
     }
 
     @DeleteMapping("/api/player/select/{pId}")
-    public void removeFavorite(@PathVariable Long pId, HttpSession session) {
+    public void removeFavorite(@PathVariable Integer pId, HttpSession session) {
         String username = (String) session.getAttribute("username");
 
         Member member = memberRepository.findByUsername(username);

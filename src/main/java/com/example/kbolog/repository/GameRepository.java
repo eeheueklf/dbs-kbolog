@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface GameRepository extends JpaRepository<Game, Long> {
+public interface GameRepository extends JpaRepository<Game, Integer> {
 
 // 관심 팀 경기 일정 ( 한 달 )
     @Query(value = "SELECT g.* FROM game g " +
@@ -17,7 +17,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "JOIN team away_team ON g.away_team = away_team.team_id " +
             "WHERE (home_team.team_id = :teamId OR away_team.team_id = :teamId) " +
             "AND g.game_date BETWEEN :start AND :end", nativeQuery = true)
-    List<Game> findGamesByTeamAndDateRange(@Param("teamId") Long teamId,
+    List<Game> findGamesByTeamAndDateRange(@Param("teamId") Integer teamId,
                                            @Param("start") LocalDate startDate,
                                            @Param("end") LocalDate endDate);
 
@@ -28,7 +28,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
 //    아이디로 게임 찾기
     @Query(value = "SELECT * FROM game g WHERE g.game_id = :gameId", nativeQuery = true)
-    Game findByGameId(@Param("gameId") Long gameId);
+    Game findByGameId(@Param("gameId") Integer gameId);
 
 
 }
