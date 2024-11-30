@@ -10,7 +10,12 @@
   font-weight: 200;
   font-style: normal;
 }
-
+@font-face {
+  font-family: 'KBO-Dia-Gothic_bold';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
 
 .default {
   width: 1000px;
@@ -98,3 +103,56 @@ label {
 .ii:hover{
   color:black;
 }
+
+.info{
+  font-family: 'Pretendard-Regular';
+
+}
+/* 팀별 색상 스타일 */
+.teamColor{
+  font-family: 'KBO-Dia-Gothic_bold';
+  font-size: 3.6rem;
+  margin-right: 10px;
+}
+
+.kiwoom {
+  color: rgba(87, 5, 20);
+}
+
+.doosan {
+  color: rgba(19, 18, 48);
+}
+
+.lotte {
+  color: rgba(4, 30, 66);
+}
+
+.samsung {
+  color: rgba(7, 76, 161);
+}
+
+.hanwha {
+  color: rgba(247, 54, 0);
+}
+
+.kia {
+  color: rgba(234, 0, 41);
+}
+
+.lg {
+  color: rgba(195, 4, 82);
+}
+
+.ssg {
+  color: rgba(206, 14, 45);
+}
+
+.nc {
+  color: rgba(49, 82, 136);
+}
+
+.kt {
+  color: rgba(0, 0, 0);
+}
+
+

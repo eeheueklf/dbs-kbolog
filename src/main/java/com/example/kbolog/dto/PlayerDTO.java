@@ -56,6 +56,8 @@ public class PlayerDTO {
         this.playerPosition = player.getPlayerPosition();
         this.teamName = player.getTeam().getTeamName();
         this.teamSponsor = player.getTeam().getSponsor();
+        this.battingHand = player.getBattingHand();
+        this.hander = player.getHander();
     }
 }
 

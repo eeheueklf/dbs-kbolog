@@ -15,13 +15,27 @@ export default function PlayerDetail() {
     const { pId } = useParams();
     const [pData, setPData] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
+    function getTeamClass(teamName) {
+        if (teamName === "기아") return styles.kia;
+        if (teamName === "LG") return styles.lg;
+        if (teamName === "두산") return styles.doosan;
+        if (teamName === "키움") return styles.kiwoom;
+        if (teamName === "SSG") return styles.ssg;
+        if (teamName === "삼성") return styles.samsung;
+        if (teamName === "한화") return styles.hanwha;
+        if (teamName === "롯데") return styles.lotte;
+        if (teamName === "NC") return styles.nc;
+        if (teamName === "KT") return styles.kt;
 
+        return styles.defaultTeam;
+    }
     useEffect(() => {
         // 선수 상세 정보 가져오기
         fetch(`/api/player/${pId}`)
             .then(res => res.json())
             .then((data) => {
                 setPlayer(data);
+                console.log(data)
                 setPData({
                     ...data,
                     scoreData: data.playerPosition === 1
@@ -84,7 +98,6 @@ export default function PlayerDetail() {
             <div className={styles.inner}>
                 {player ? (
                     <div>
-                        {/* 관심 선수 아이콘 */}
                         <div onClick={toggleFavorite} className={styles.favoriteIcon}>
                             <FontAwesomeIcon
                                 className={styles.ii}
@@ -95,18 +108,12 @@ export default function PlayerDetail() {
                         {player.playerPosition === 1 ? (
                             <p className={styles.emoji}>🧢</p>
                         ) : <p className={styles.emoji}>⚾️</p>}
-                        <p className={styles.title}>{player.playerName}</p>
-
-                        <SingleTable
-                            iconName={"faBaseball"}
-                            type={"등번호"}
-                            data={player.playerNumber}
-                        />
-                        <SingleTable
-                            iconName={"faTicket"}
-                            type={"포지션"}
-                            data={getPosition(player.playerPosition)}
-                        />
+                        <p className={styles.info}>{getPosition(player.playerPosition)} / {player.hander}{player.battingHand}</p>
+                        <p className={styles.title}>
+                            <span
+                                className={`${styles.teamColor} ${getTeamClass(player.teamSponsor)}`}>{player.playerNumber}</span>
+                            {player.playerName}
+                        </p>
                         {pData ?
                             (
                                 <PlayerScore
