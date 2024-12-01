@@ -28,6 +28,19 @@ public class PlayerDTO {
     private Double ops;
     private Double war;
 
+    private Integer teamId;
+    private Long fanCount;
+
+    public PlayerDTO(Integer playerId, Long fanCount, String playerName, Integer playerPosition, Integer teamId, String teamName, String teamSponsor) {
+        this.playerId = playerId;
+        this.fanCount = fanCount;
+        this.playerName = playerName;
+        this.playerPosition = playerPosition;
+        this.teamId = teamId;
+        this.teamName = teamName;
+        this.teamSponsor = teamSponsor;
+    }
+
     public PlayerDTO(Integer playerId, String playerName, Integer playerNumber, Integer playerPosition,String teamName, String teamSponsor, LocalDate cheerDate) {
         this.playerId = playerId;
         this.playerName = playerName;

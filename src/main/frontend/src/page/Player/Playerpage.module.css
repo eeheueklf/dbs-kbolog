@@ -41,3 +41,21 @@
 .cropping img {
   margin-top: 20px;
 }
+
+.rankBtn {
+  padding: 5px;
+  margin-left : 10px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  border : none;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rankBtn:hover {
+  background-color: #f0f0f0;
+}
+

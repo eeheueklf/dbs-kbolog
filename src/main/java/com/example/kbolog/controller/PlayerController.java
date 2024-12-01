@@ -141,6 +141,33 @@ public class PlayerController {
         }
     }
 
+    @GetMapping("/api/player/rank")
+    public ResponseEntity<List<PlayerDTO>> getPlayerRank() {
+
+        try {
+            // Native Query 결과 가져오기
+            List<Object[]> results = playerRepository.findPlayerRank();
+
+            // 결과를 PlayerDTO로 변환
+            List<PlayerDTO> playerRank = results.stream()
+                    .map(row -> new PlayerDTO(
+                            (Integer) row[0],
+                            (Long) row[1],
+                            (String) row[2],
+                            (Integer) row[3],
+                            (Integer) row[4],
+                            (String) row[5],
+                            (String) row[6]
+                    ))
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(playerRank);
+        } catch (Exception e) {
+            e.printStackTrace(); // 로그 출력
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 
 }
 

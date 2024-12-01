@@ -4,10 +4,11 @@ import Footer from "../../components/_Layout/Footer";
 import HeaderImg from "../../image/playerHeader.jpg";
 import PlayerTable from "../../components/_Table/PlayerTable";
 import Calendar from "react-calendar";
+import {useNavigate} from "react-router-dom";
 
 export default function Playerpage() {
     const [player, setPlayer] = useState([]);
-
+    const navigate = useNavigate();
     useEffect(() => {
         fetch("/api/player/cheer")
             .then(res=>res.json())
@@ -26,7 +27,14 @@ export default function Playerpage() {
                 <img className={styles.headerImg} src={HeaderImg} alt="Header" />
             </div>
             <div className={styles.inner}>
-                <div className={styles.title}>관심 선수</div>
+                <div className={styles.title}>관심 선수
+                    <input
+                        type="button"
+                        value="💕팬 랭킹"
+                        className={styles.rankBtn}
+                        onClick={() => navigate('/players/rank')}
+                    />
+                </div>
                 <br/>
                 <PlayerTable pId={0}/>
 
@@ -49,8 +57,8 @@ export default function Playerpage() {
                             pSponsor={data.teamSponsor}
                             cheerDate={`${diffInDays}일`}
                         />
-                        );
-                    })
+                    );
+                })
                 }
                 <PlayerTable pId={-1}/>
 
