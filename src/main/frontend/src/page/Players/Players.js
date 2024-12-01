@@ -6,7 +6,7 @@ import PlayerTable from "../../components/_Table/_PTable";
 
 export default function Players() {
     const [players, setPlayers] = useState([]);
-    const [view, setView] = useState("pitcher");
+    const [view, setView] = useState("Pitcher");
 
     useEffect(() => {
         fetch(`/api/player`)
@@ -19,19 +19,20 @@ export default function Players() {
             });
     }, []);
 
-    const filterPlayers = (position) => {
-        if (position === "pitcher") {
-            return players.filter(player => player.playerPosition === 1); // 투수만 필터
+    const filterPlayers = (type) => {
+        if (type === "Pitcher") {
+            return players.filter(player => player.playerType === "Pitcher"); // 투수만 필터
         } else {
-            return players.filter(player => player.playerPosition !== 1); // 타자만 필터
+            return players.filter(player => player.playerType === "Hitter"); // 타자만 필터
         }
     };
+
     const [toolbarStatus, setToolbarStatus] = useState(false);  // 초기 상태는 OFF
 
     const toggleToobarStatus = () => {
         setToolbarStatus(!toolbarStatus);
-        if(view==="hitter") setView("pitcher")
-        else setView("hitter")
+        if(view==="Hitter") setView("Pitcher")
+        else setView("Hitter")
     };
     return (
         <div className={styles.default}>
@@ -59,10 +60,9 @@ export default function Players() {
 
                 <br/>
 
-                {/* 헤더는 pPosition에 따라 동적으로 렌더링되므로 */}
-                <PlayerTable pId={0} pPosition={view === "pitcher" ? 1 : 0}/>
+                <PlayerTable pId={0} pPosition={view === "Pitcher" ? 1 : 0}/>
                 {filterPlayers(view).map(data => {
-                    if (view === "hitter") {
+                    if (view === "Hitter") {
                         return (
                             <PlayerTable
                                 key={data.playerId}
@@ -70,7 +70,7 @@ export default function Players() {
                                 pName={data.playerName}
                                 pPosition={data.playerPosition}
                                 pTeam={data.teamName}
-                                pSponsor={data.teamSponsor}
+                                pSponsor={data.sponsor}
                                 avg={data.avg}
                                 ops={data.ops}
                                 war={data.war}
@@ -84,7 +84,7 @@ export default function Players() {
                                 pName={data.playerName}
                                 pPosition={data.playerPosition}
                                 pTeam={data.teamName}
-                                pSponsor={data.teamSponsor}
+                                pSponsor={data.sponsor}
                                 era={data.era}
                                 ip={data.ip}
                                 whip={data.whip}

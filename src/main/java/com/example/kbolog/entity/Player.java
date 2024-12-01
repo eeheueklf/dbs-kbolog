@@ -11,6 +11,7 @@ import java.util.Set;
 @Entity
 @Getter
 @JsonIgnoreProperties({"cheeredMember"})
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Player {
 
     @Id

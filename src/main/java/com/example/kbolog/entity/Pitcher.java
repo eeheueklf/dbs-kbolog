@@ -6,15 +6,8 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class Pitcher {
-
-    @Id
-    private Integer playerId;
-
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "player_id")
-    private Player player;
+@DiscriminatorValue("PITCHER")
+public class Pitcher extends Player{
 
     @Column(nullable = false)
     private Double ip; // 이닝

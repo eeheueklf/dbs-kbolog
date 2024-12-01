@@ -16,7 +16,7 @@ export default function PlayerDetail() {
     const [pData, setPData] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
     function getTeamClass(teamName) {
-        if (teamName === "기아") return styles.kia;
+        if (teamName === "KIA") return styles.kia;
         if (teamName === "LG") return styles.lg;
         if (teamName === "두산") return styles.doosan;
         if (teamName === "키움") return styles.kiwoom;
@@ -32,13 +32,17 @@ export default function PlayerDetail() {
     useEffect(() => {
         // 선수 상세 정보 가져오기
         fetch(`/api/player/${pId}`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) { // 상태 코드가 2xx가 아닐 경우 오류 처리
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            })
             .then((data) => {
                 setPlayer(data);
-                console.log(data)
                 setPData({
                     ...data,
-                    scoreData: data.playerPosition === 1
+                    scoreData: data.playerType === "Pitcher"
                         ? {
                             era: data.era,
                             ip: data.ip,
@@ -105,7 +109,7 @@ export default function PlayerDetail() {
                                 title={isFavorite ? "관심 선수 해제" : "관심 선수 설정"}
                             />
                         </div>
-                        {player.playerPosition === 1 ? (
+                        {player.playerType === "Pitcher" ? (
                             <p className={styles.emoji}>🧢</p>
                         ) : <p className={styles.emoji}>⚾️</p>}
                         <p className={styles.info}>{getPosition(player.playerPosition)} / {player.hander}{player.battingHand}</p>
@@ -117,7 +121,7 @@ export default function PlayerDetail() {
                         {pData ?
                             (
                                 <PlayerScore
-                                    position={pData.playerPosition}
+                                    playerType={pData.playerType}
                                     scoreData={pData.scoreData}
                                 />
                             ) : <p>Loading...</p>

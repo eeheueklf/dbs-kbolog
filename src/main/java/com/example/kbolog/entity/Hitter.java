@@ -5,15 +5,8 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class Hitter {
-
-    @Id
-    private Integer playerId;
-
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "player_id")
-    private Player player;
+@DiscriminatorValue("HITTER")
+public class Hitter extends Player {
 
     @Column(nullable = false)
     private Double avg; // 타율

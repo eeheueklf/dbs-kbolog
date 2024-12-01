@@ -6,7 +6,7 @@ import {faMagnifyingGlass, faPlus,faFontAwesomeFlag} from "@fortawesome/free-sol
 import {faCompass,faFontAwesome, faCalendar} from "@fortawesome/free-regular-svg-icons";
 
 export function getTeamClass(teamName) {
-    if (teamName === "기아") return styles.kia;
+    if (teamName === "KIA") return styles.kia;
     if (teamName === "LG") return styles.lg;
     if (teamName === "두산") return styles.doosan;
     if (teamName === "키움") return styles.kiwoom;

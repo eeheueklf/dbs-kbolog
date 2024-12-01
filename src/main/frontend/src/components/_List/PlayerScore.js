@@ -2,11 +2,10 @@ import React from "react";
 import styles from "./PlayerScore.module.css"
 
 
-export default function PlayerScore({ position ,scoreData }) {
-
+export default function PlayerScore({ playerType ,scoreData }) {
     return (
         <div className={styles.playerScore}>
-            {position === 1 ? (
+            {playerType === "Pitcher" ? (
                 <ul>
                     <li>
                         <span>ERA</span>
