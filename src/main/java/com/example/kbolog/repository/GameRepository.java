@@ -12,16 +12,23 @@ import java.util.List;
 public interface GameRepository extends JpaRepository<Game, Integer> {
 
 // 관심 팀 경기 일정 ( 한 달 )
-    @Query(value = "SELECT g.* FROM game g " +
+    @Query(value = "SELECT g.game_id, g.game_date, " +
+            "home_team.team_name AS home_team_name, " +
+            "away_team.team_name AS away_team_name, " +
+            "home_team.sponsor AS home_team_sponsor, " +
+            "away_team.sponsor AS away_team_sponsor " +
+            "FROM game g " +
             "JOIN team home_team ON g.home_team = home_team.team_id " +
             "JOIN team away_team ON g.away_team = away_team.team_id " +
             "WHERE (home_team.team_id = :teamId OR away_team.team_id = :teamId) " +
             "AND g.game_date BETWEEN :start AND :end", nativeQuery = true)
-    List<Game> findGamesByTeamAndDateRange(@Param("teamId") Integer teamId,
-                                           @Param("start") LocalDate startDate,
-                                           @Param("end") LocalDate endDate);
+    List<Object[]> findGamesByTeamAndDateRange(@Param("teamId") Integer teamId,
+                                               @Param("start") LocalDate startDate,
+                                               @Param("end") LocalDate endDate);
 
-// 날짜 선택 시 경기 일정 리스트
+
+
+    // 날짜 선택 시 경기 일정 리스트
     @Query(value = "SELECT * FROM game WHERE game_date = :gameDate", nativeQuery = true)
     List<Game> findByGameDate(@Param("gameDate") LocalDate gameDate);
 

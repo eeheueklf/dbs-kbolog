@@ -14,8 +14,7 @@ public class GameRequest {
     private LocalDate end;
 
     public GameRequest(Integer teamId, LocalDate start, LocalDate end) {
-        this.teamId = teamId
-        ;
+        this.teamId = teamId;
         this.start = start;
         this.end = end;
     }

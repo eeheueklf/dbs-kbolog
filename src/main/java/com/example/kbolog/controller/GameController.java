@@ -9,7 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins="http://localhost:3000")
@@ -27,11 +29,22 @@ public class GameController {
     }
 
     @PostMapping("/api/game/team")
-    public List<GameDTO> getGamesByTeamAndMonth(@RequestBody GameRequest request) {
+    public List<Map<String, Object>> getGamesByTeamAndMonth(@RequestBody GameRequest request) {
         // 요청 데이터에 맞는 게임 목록을 가져옵니다.
-        List<Game> games = gameRepository.findGamesByTeamAndDateRange(request.getTeamId(), request.getStart(), request.getEnd());
+        List<Object[]> gamesData = gameRepository.findGamesByTeamAndDateRange(request.getTeamId(), request.getStart(), request.getEnd());
 
-        // 반환 값으로 GameDTO를 사용하여 데이터 변환 후 반환
-        return games.stream().map(GameDTO::new).collect(Collectors.toList());
+        // Object[] 배열을 Map으로 변환하여 리스트로 반환
+        return gamesData.stream()
+                .map(gameData -> {
+                    Map<String, Object> gameMap = new HashMap<>();
+                    gameMap.put("gameId", gameData[0]);
+                    gameMap.put("gameDate", gameData[1]);
+                    gameMap.put("homeTeamName", gameData[2]);
+                    gameMap.put("awayTeamName", gameData[3]);
+                    gameMap.put("homeTeamSponsor", gameData[4]);
+                    gameMap.put("awayTeamSponsor", gameData[5]);
+                    return gameMap;
+                })
+                .collect(Collectors.toList());
     }
 }
